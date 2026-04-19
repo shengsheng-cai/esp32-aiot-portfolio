@@ -104,7 +104,7 @@ def train_best(device, processor):
     train_loader = DataLoader(MNISTforViT(raw_train, train_transform), batch_size=BATCH_SIZE, shuffle=True)
     val_loader = DataLoader(MNISTforViT(raw_val, val_transform), batch_size=BATCH_SIZE)
 
-    epochs = 10
+    epochs = 3
     model = ViTForImageClassification.from_pretrained(
         MODEL_NAME, num_labels=10, ignore_mismatched_sizes=True
     ).to(device)

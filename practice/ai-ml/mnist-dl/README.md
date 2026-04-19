@@ -26,7 +26,7 @@ Draw a digit on the canvas — SimpleNN, SimpleCNN, custom ViT, and HuggingFace 
 | ViT_ImageNet | google/vit-base-patch16-224 | — | HuggingFace（ImageNet pretrained，對照用） |
 | ViT_3rd_MNIST | farleyknight-org-username/vit-base-mnist | ~99% | HuggingFace |
 | ViT_HF_4060 | google/vit-base-patch16-224 fine-tuned 3 epochs | — | 自訓 × HF（`make train-hf`，可選） |
-| ViT_HF_BestTuned | google/vit-base-patch16-224 fine-tuned + augmentation | — | 自訓 × HF（`make train-hf`，可選） |
+| ViT_HF_BestTuned | google/vit-base-patch16-224 fine-tuned + augmentation | 99.26% | 自訓 × HF（`make train-hf`，可選） |
 
 ### 技術堆棧
 
