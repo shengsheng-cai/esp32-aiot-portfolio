@@ -24,3 +24,13 @@
 結合 9 年可靠度工程背景（硬體除錯 · 環境測試 · 法規標準），
 以 ESP32 + MicroPython 為硬體核心，整合職訓的 AI 應用（PyTorch · RAG · MCP）與 MQTT 通訊，
 切入市面少見的「硬體出身 × AI 應用」定位。
+
+---
+
+## 練習成果
+
+課程內容以 FastAPI + React 重寫，每個子專案包含可執行程式碼與學習說明。
+
+| 子專案 | 說明 | 技術 |
+|--------|------|------|
+| [mnist-dl](practice/ai-ml/mnist-dl/) | 手寫數字辨識 WebUI，最多 7 個深度學習模型同步推論 | FastAPI · PyTorch · React · OpenCV |

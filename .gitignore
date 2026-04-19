@@ -1,3 +1,7 @@
 _originals/
 .venv/
 .DS_Store
+*.pth
+node_modules/
+data/
+__pycache__/
