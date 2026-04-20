@@ -173,7 +173,7 @@ from google.genai import types
 
 image_part = types.Part.from_bytes(data=img_bytes, mime_type="image/jpeg")
 response = client.models.generate_content(
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash-lite",
     contents=[image_part, "這張圖裡有什麼？"],
 )
 ```
