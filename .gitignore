@@ -4,3 +4,5 @@ _originals/
 *.pth
 node_modules/
 __pycache__/
+*.db
+practice/ai-ml/mnist-dl/training/data/
