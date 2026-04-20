@@ -88,14 +88,3 @@ CREATE TABLE reservoir_snapshots (
 ```
 
 ---
-
-## 原始碼 Bug 對照（課堂版 app.py）
-
-| 行號 | 問題 | 修正 |
-|------|------|------|
-| 118 | `element.text.strp()` | 改為 `.strip()` |
-| 126 | `percent = "資料擷取失敗"` 在 try/except 外，直接覆蓋抓到的值 | 移除，改用 `if not percent` 判斷 |
-| 129+ | `volumn` 拼錯 | 改為 `volume` |
-| 240 | `encoding='utf8-sig'` | 改為 `'utf-8-sig'` |
-| 259 | 使用 `percent_clean` 但未建立該欄 | 補上數字清洗步驟 |
-| 263 | `plt_df.empty()` | 改為 `plt_df.empty`（屬性，非方法）|
