@@ -35,6 +35,18 @@ cp .env.example .env   # 填入 GEMINI_API_KEY
 
 ---
 
+## 資料
+
+| 資料 | 位置 | 建立方式 |
+|------|------|---------|
+| 課表（SQLite） | `mcp/courses.db` | `make dev`（自動建立） |
+| 法規向量庫（Chroma） | `rag/chroma_db/` | `make rag-pdf-setup PDF=rag/data/traffic_law.txt` |
+| 法規原文 | `rag/data/traffic_law.txt` | 道路交通管理處罰條例（政府 OpenData） |
+
+兩個 DB 不在 git 裡，clone 後需要手動建立。
+
+---
+
 ## 授權
 
 資料集採用公開授權來源（政府 OpenData / 公開文件）
