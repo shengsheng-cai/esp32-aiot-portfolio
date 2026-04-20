@@ -4,6 +4,7 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.11-EE4C2C?logo=pytorch&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.136-009688?logo=fastapi&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
 
 **Hand-drawn digit recognition with up to 7 deep learning models via FastAPI + React.**  
 Draw a digit on the canvas — SimpleNN, SimpleCNN, custom ViT, and HuggingFace models inference simultaneously and rank results by confidence.
@@ -35,6 +36,7 @@ Draw a digit on the canvas — SimpleNN, SimpleCNN, custom ViT, and HuggingFace 
 | 後端 | FastAPI · PyTorch · OpenCV · Transformers |
 | 前端 | React 19 · Vite · Canvas API |
 | 訓練 | PyTorch · MNIST（公開資料集）· MPS / CUDA |
+| 部署 | Docker · Docker Compose · Nginx |
 
 ---
 
@@ -65,6 +67,8 @@ React 前端（信心度色條排序顯示）
 
 ## 快速啟動
 
+### 本地開發
+
 ```bash
 # 1. 建立 Python 虛擬環境並安裝套件
 python3 -m venv .venv
@@ -85,6 +89,21 @@ make dev            # 後端 :8000 + 前端 :5173
 | 後端 API | http://localhost:8000 |
 | API 文件 | http://localhost:8000/docs |
 
+### Docker
+
+```bash
+# 1. 訓練模型（首次使用，同上）
+
+# 2. 打包並啟動
+make docker-build
+make docker-up
+```
+
+| 服務 | URL |
+|------|-----|
+| 前端 | http://localhost |
+| API 文件 | http://localhost/docs |
+
 ---
 
 ## 目錄結構
@@ -95,18 +114,22 @@ mnist-dl/
 │   ├── app.py            # FastAPI 路由與模型載入
 │   ├── models.py         # SimpleNN / SimpleCNN / ViT_MNIST class
 │   ├── preprocessing.py  # OpenCV 前處理（手寫字置中）
-│   └── requirements.txt
+│   ├── requirements.txt
+│   └── Dockerfile
 ├── client/               # React（Vite）
-│   └── src/
-│       ├── App.jsx
-│       └── components/
-│           ├── DrawingCanvas.jsx
-│           └── ResultsPanel.jsx
+│   ├── src/
+│   │   ├── App.jsx
+│   │   └── components/
+│   │       ├── DrawingCanvas.jsx
+│   │       └── ResultsPanel.jsx
+│   ├── Dockerfile
+│   └── nginx.conf
 ├── training/
 │   ├── train_simple.py   # SimpleNN + SimpleCNN
 │   ├── train_vit_custom.py
 │   └── train_vit_hf.py
 ├── models/               # .pth 檔（gitignored）
 ├── .venv/                # Python 環境（gitignored）
+├── docker-compose.yml
 └── Makefile
 ```

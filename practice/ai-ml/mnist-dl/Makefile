@@ -7,7 +7,7 @@ MODEL_DIR ?= ../models
 
 PYTHON    := $(VENV_BIN)/python
 
-.PHONY: install dev backend frontend train-simple train-vit train-hf
+.PHONY: install dev backend frontend train-simple train-vit train-hf docker-build docker-up docker-down
 
 install:
 	$(PIP) install -r backend/requirements.txt
@@ -31,3 +31,12 @@ train-vit:
 
 train-hf:
 	cd training && ../$(PYTHON) train_vit_hf.py
+
+docker-build:
+	docker compose build
+
+docker-up:
+	docker compose up -d
+
+docker-down:
+	docker compose down

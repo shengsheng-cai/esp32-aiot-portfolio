@@ -1,0 +1,33 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: mnist-backend:latest
+    container_name: mnist-backend
+    volumes:
+      - ./models:/app/models:ro
+    environment:
+      - MODEL_DIR=/app/models
+      - HF_HOME=/app/.cache/huggingface
+      - CUDA_VISIBLE_DEVICES=""
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: mnist-frontend:latest
+    container_name: mnist-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
