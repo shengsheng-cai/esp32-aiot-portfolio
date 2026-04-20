@@ -34,3 +34,4 @@
 | 子專案 | 說明 | 技術 |
 |--------|------|------|
 | [mnist-dl](practice/ai-ml/mnist-dl/) | 手寫數字辨識 WebUI，最多 7 個深度學習模型同步推論 | FastAPI · PyTorch · React · OpenCV |
+| [taiwan-reservoir](practice/ai-ml/taiwan-reservoir/) | 台灣水庫即時水情爬取 API，Selenium 爬取 → SQLite 存庫 → FastAPI 查詢 | FastAPI · Selenium · SQLite |

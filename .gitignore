@@ -5,3 +5,4 @@ _originals/
 node_modules/
 data/
 __pycache__/
+*.db
