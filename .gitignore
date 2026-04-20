@@ -3,6 +3,4 @@ _originals/
 .DS_Store
 *.pth
 node_modules/
-data/
 __pycache__/
-*.db

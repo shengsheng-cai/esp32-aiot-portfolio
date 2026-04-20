@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Vector DB
+rag/chroma_db/
+
+# Data（PDF 不上傳，保留 .gitkeep）
+rag/data/*.pdf
+
+# SQLite DB
+*.db

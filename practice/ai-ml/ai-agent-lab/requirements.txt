@@ -1,0 +1,10 @@
+google-genai
+faiss-cpu
+chromadb
+pymupdf
+pypdf
+fastmcp
+httpx
+openai
+Pillow
+python-dotenv
