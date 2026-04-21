@@ -1,4 +1,4 @@
-.PHONY: install smoke transfer transfer-efficientnet transfer-quick vae vae-denoise style dream cartoonize cartoonize-style
+.PHONY: install dev smoke transfer transfer-efficientnet transfer-quick vae vae-denoise style dream cartoonize cartoonize-all cartoonize-style
 
 install:
 	pip install -r requirements.txt
@@ -9,7 +9,7 @@ dev:
 	$(MAKE) smoke
 
 # ── Smoke Test ───────────────────────────────────────────────────────────────
-# 一鍵驗證所有模組（cartoonize 除外，animeganv2 套件問題）
+# 一鍵驗證所有模組（cartoonize 除外，需額外網路下載權重）
 # 時間：CPU ~30 分鐘
 smoke:
 	$(MAKE) transfer-quick
@@ -25,6 +25,7 @@ smoke:
 transfer:
 	python transfer/train.py --model resnet50
 
+# 同上，改用 EfficientNet-B0（更輕量，精度相近）
 transfer-efficientnet:
 	python transfer/train.py --model efficientnet
 
@@ -57,13 +58,18 @@ dream:
 	python style/style.py dream --img $(IMG)
 
 # ── Cartoonize ───────────────────────────────────────────────────────────────
-# ⚠️ 需額外安裝 animeganv2（PyPI 沒有，需從 GitHub 安裝，目前未驗證）
+# 純 PyTorch（AnimeGANv2），首次執行會自動從 GitHub 下載預訓練權重
 # 輸入：cartoonize/input_images/*.jpg
 # 產出：cartoonize/output_images/<style>/*
+# 風格：paprika / face_paint_v2 / celeba_distill
 cartoonize:
-	python cartoonize/cartoonize.py --input-dir cartoonize/input_images --all-styles
+	python cartoonize/cartoonize.py --input-dir cartoonize/input_images --output-dir cartoonize/output_images --styles paprika
 
-# 範例：make cartoonize-style STYLE=Hayao
+# 三種風格全跑（paprika / face_paint_v2 / celeba_distill），會額外下載兩組權重
+cartoonize-all:
+	python cartoonize/cartoonize.py --input-dir cartoonize/input_images --output-dir cartoonize/output_images --all-styles
+
+# 範例：make cartoonize-style STYLE=paprika
 cartoonize-style:
-	@[ "$(STYLE)" ] || { echo "Usage: make cartoonize-style STYLE=Hayao"; exit 1; }
-	python cartoonize/cartoonize.py --input-dir cartoonize/input_images --styles $(STYLE)
+	@[ "$(STYLE)" ] || { echo "Usage: make cartoonize-style STYLE=paprika|face_paint_v2|celeba_distill"; exit 1; }
+	python cartoonize/cartoonize.py --input-dir cartoonize/input_images --output-dir cartoonize/output_images --styles $(STYLE)

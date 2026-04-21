@@ -11,7 +11,7 @@ import numpy as np
 
 DEVICE = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
 
-CONTENT_LAYERS = {"features.28"}
+CONTENT_LAYERS = {"features.30"}
 STYLE_LAYERS = {"features.0", "features.5", "features.10", "features.19", "features.28"}
 
 
@@ -122,7 +122,7 @@ class StyleTransfer:
 # ─── Deep Dream ──────────────────────────────────────────────────────────────
 
 DREAM_LAYERS = {
-    "Mixed_5b": 0.2,
+    "Mixed_5d": 0.2,
     "Mixed_6a": 0.5,
     "Mixed_6b": 2.0,
     "Mixed_6c": 1.5,
@@ -212,6 +212,7 @@ class DeepDream:
 # ─── Main ────────────────────────────────────────────────────────────────────
 
 def main():
+    global DEVICE
     device_parser = argparse.ArgumentParser(add_help=False)
     device_parser.add_argument("--device", default=DEVICE, choices=["cpu", "cuda", "mps"])
 
@@ -238,7 +239,6 @@ def main():
     dp.add_argument("--max-loss",    type=float, default=10.0)
 
     args = parser.parse_args()
-    global DEVICE
     DEVICE = args.device
     print(f"Device: {DEVICE} | Mode: {args.mode}")
 

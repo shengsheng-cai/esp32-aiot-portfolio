@@ -2,7 +2,7 @@
 
 職訓課程重寫 — Transfer Learning · VAE · Style Transfer · Cartoonize 學習實驗室。
 
-技術棧：Python · PyTorch · torchvision · AnimeGAN v2
+技術棧：Python · PyTorch · torchvision · AnimeGANv2
 
 ---
 
@@ -22,7 +22,7 @@ transfer → vae → style → cartoonize
 | [transfer/](transfer/) | 遷移學習：ImageNet 預訓練模型分類 CIFAR-10 | ResNet50 · EfficientNet · Feature Extraction · Fine-tuning |
 | [vae/](vae/) | 變分自編碼器：生成 + 去噪 | VAE · Denoising AE · 潛在空間視覺化 |
 | [style/](style/) | 神經風格轉換 + Deep Dream | VGG19 · Gram Matrix · InceptionV3 · LBFGS |
-| [cartoonize/](cartoonize/) | 卡通化推理：四種動漫風格 | AnimeGAN v2 · Hayao · Paprika · Shinkai |
+| [cartoonize/](cartoonize/) | 卡通化推理：動漫風格生成 | AnimeGANv2 · paprika · face_paint_v2 · celeba_distill |
 
 ---
 
@@ -32,7 +32,7 @@ transfer → vae → style → cartoonize
 pip install -r requirements.txt
 ```
 
-> cartoonize 需要額外安裝 `animeganv2`（PyPI 沒有，需從 GitHub source 裝），目前 requirements 不含。想跑卡通化再單獨處理。
+> cartoonize 使用 `torch.hub` 自動下載 AnimeGANv2 權重，首次執行需要網路，之後 cache 在 `~/.cache/torch/hub/`。
 
 ---
 
@@ -70,8 +70,9 @@ make vae-denoise      # MPS ~3 分鐘 / CPU ~10 分鐘，產出 denoise_result.p
 | `make vae-denoise` | 同上 | ~10 分鐘 | `denoise_ae.pth`, `denoise_result.png` |
 | `make style CONTENT=<圖> STYLE_IMG=<圖>` | 自備 2 張圖 | 幾分鐘 | `result_style.png` |
 | `make dream IMG=<圖>` | 自備 1 張圖 | 幾分鐘 | `result_dream.png` |
-| `make cartoonize` | animeganv2 + `cartoonize/input_images/` | 幾分鐘 | `cartoonize/output_images/<style>/*` |
-| `make cartoonize-style STYLE=Hayao` | 同上 | 幾分鐘 | 單一風格輸出 |
+| `make cartoonize` | `cartoonize/input_images/`，首次自動下載權重 | 幾分鐘 | `cartoonize/output_images/paprika/*` |
+| `make cartoonize-all` | 同上，跑全部 3 種風格 | 幾分鐘 | `cartoonize/output_images/<style>/*` |
+| `make cartoonize-style STYLE=face_paint_v2` | 同上，指定風格（paprika / face_paint_v2 / celeba_distill） | 幾分鐘 | 單一風格輸出 |
 
 輸出檔除了 cartoonize 以外都落在執行 `make` 的當前目錄（repo 根目錄）。
 
@@ -131,18 +132,15 @@ Deep Dream 使用 InceptionV3，多尺度 octave 梯度上升。
 
 ### cartoonize — 卡通化
 
-> ⚠️ 目前未驗證。`animeganv2` 套件 PyPI 沒有，需從 GitHub 另外裝。要跑這個模組再處理。
+將照片轉換為動漫風格，使用 AnimeGANv2（PyTorch），首次執行透過 `torch.hub` 自動下載權重。
 
-將照片轉換為動漫風格，使用 AnimeGAN v2 預訓練模型。
-
-| 風格 | 參考 |
+| 風格 | 說明 |
 |------|------|
-| Hayao | 宮崎駿風格 |
-| Paprika | 今敏風格 |
-| Shinkai | 新海誠風格 |
-| PortraitSketch | 素描風格 |
+| `paprika` | 今敏風格（顆粒感，飽和） |
+| `face_paint_v2` | 動漫臉部繪畫風格 |
+| `celeba_distill` | 輕量蒸餾模型，速度最快 |
 
-輸入圖片放到 `cartoonize/input_images/`，結果存至 `cartoonize/output_images/<style>/`，自動產生左原圖右卡通的對比圖。
+輸入圖片放到 `cartoonize/input_images/`，結果存至 `cartoonize/output_images/<style>/`，自動產生原圖與卡通化對比圖。
 
 ---
 
@@ -155,10 +153,10 @@ Deep Dream 使用 InceptionV3，多尺度 octave 梯度上升。
 | VAE | PyTorch 自實作 | Keras 官方範例 | 框架統一 |
 | Style Transfer | torch.optim.LBFGS | scipy fmin_l_bfgs_b | 不需 TF1 相容層 |
 | Deep Dream | InceptionV3 梯度上升 | 同，TF1 風格 | 移除 disable_eager_execution |
-| Cartoonize | AnimeGAN v2（自動下載權重） | CartoonGAN（需自行訓練） | 可重現，clone 直接跑 |
+| Cartoonize | AnimeGANv2（PyTorch，torch.hub 自動下載） | CartoonGAN（TF-based） | 統一 PyTorch，不需額外裝 TF |
 
 ---
 
 ## 授權
 
-模型權重採用各原始專案授權（AnimeGAN v2、torchvision pretrained models）。
+模型權重採用各原始專案授權（AnimeGANv2、torchvision pretrained models）。

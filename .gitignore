@@ -2,6 +2,7 @@ _originals/
 .venv/
 .DS_Store
 *.pth
+*.pt
 node_modules/
 __pycache__/
 *.db

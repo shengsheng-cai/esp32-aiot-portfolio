@@ -19,5 +19,8 @@ label_clusters.png
 denoise_result.png
 cartoonize/output_images/
 
+# 防止意外在 cv-lab 根目錄產生的輸出目錄進 repo
+output_images/
+
 # sample 圖片保留（make smoke 需要）
 !sample/
