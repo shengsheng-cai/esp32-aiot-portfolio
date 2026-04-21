@@ -36,3 +36,4 @@
 | [mnist-dl](practice/ai-ml/mnist-dl/) | 手寫數字辨識 WebUI，最多 7 個深度學習模型同步推論，支援 Docker 部署 | FastAPI · PyTorch · React · Docker |
 | [taiwan-reservoir](practice/ai-ml/taiwan-reservoir/) | 台灣水庫即時水情爬取 API，Selenium 爬取 → SQLite 存庫 → FastAPI 查詢 | FastAPI · Selenium · SQLite |
 | [ai-agent-lab](practice/ai-ml/ai-agent-lab/) | RAG · MCP · ReAct Agent · Vision 完整學習路徑，7 個漸進式模組，全走 Gemini API | Gemini API · FAISS · Chroma · FastMCP |
+| [cv-lab](practice/ai-ml/cv-lab/) | Transfer Learning · VAE · Style Transfer · Deep Dream 學習實驗室，支援 MPS | PyTorch · ResNet50 · EfficientNet · VGG19 · InceptionV3 |
