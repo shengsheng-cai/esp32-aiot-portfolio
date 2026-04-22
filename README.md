@@ -29,11 +29,24 @@
 
 ## 練習成果
 
-課程內容以 FastAPI + React 重寫，每個子專案包含可執行程式碼與學習說明。
+課程內容重寫為可執行學習專案，各採適合技術棧。
+
+**AI / ML**
 
 | 子專案 | 說明 | 技術 |
 |--------|------|------|
 | [mnist-dl](practice/ai-ml/mnist-dl/) | 手寫數字辨識 WebUI，最多 7 個深度學習模型同步推論，支援 Docker 部署 | FastAPI · PyTorch · React · Docker |
-| [taiwan-reservoir](practice/ai-ml/taiwan-reservoir/) | 台灣水庫即時水情爬取 API，Selenium 爬取 → SQLite 存庫 → FastAPI 查詢 | FastAPI · Selenium · SQLite |
 | [ai-agent-lab](practice/ai-ml/ai-agent-lab/) | RAG · MCP · ReAct Agent · Vision 完整學習路徑，7 個漸進式模組，全走 Gemini API | Gemini API · FAISS · Chroma · FastMCP |
 | [cv-lab](practice/ai-ml/cv-lab/) | Transfer Learning · VAE · Style Transfer · Deep Dream · Cartoonize 學習實驗室，支援 MPS | PyTorch · ResNet50 · EfficientNet · VGG19 · InceptionV3 · AnimeGANv2 |
+
+**Computer Vision**
+
+| 子專案 | 說明 | 技術 |
+|--------|------|------|
+| [img-process-lab](practice/cv/img-process-lab/) | OpenCV 傳統影像處理學習實驗室：濾波 · 直方圖 · 人臉偵測 · QR · 攝影機 | OpenCV · Python |
+
+**Web / Backend**
+
+| 子專案 | 說明 | 技術 |
+|--------|------|------|
+| [taiwan-reservoir](practice/web/taiwan-reservoir/) | 台灣水庫即時水情爬取 API，Selenium 爬取 → SQLite 存庫 → FastAPI 查詢 | FastAPI · Selenium · SQLite |
