@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaPipe 手勢辨識 - 剪刀石頭布</title>
+    <!-- 引入 MediaPipe Hands 相關資源 -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 640px;
+            margin: auto;
+        }
+        canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #video-input {
+            display: none;
+        }
+        .gesture-badge {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="bg-white p-6 rounded-2xl shadow-xl w-full max-w-2xl text-center">
+        <h1 class="text-3xl font-bold mb-4 text-gray-800">剪刀石頭布即時辨識</h1>
+        
+        <div class="mb-6">
+            <div id="status" class="text-sm text-blue-500 font-medium mb-2">正在載入模型...</div>
+            <div class="video-container rounded-lg overflow-hidden border-4 border-gray-200 bg-black aspect-video">
+                <video id="input_video" class="w-full h-full object-cover" autoplay playsinline></video>
+                <canvas id="output_canvas"></canvas>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-500 text-sm mb-1">偵測結果</p>
+                <div id="gesture-result" class="text-4xl font-black text-indigo-600">—</div>
+            </div>
+            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                <p class="text-gray-500 text-sm mb-1">手指狀態</p>
+                <div id="finger-details" class="text-xs text-gray-600 font-mono">等待影像中...</div>
+            </div>
+        </div>
+
+        <div class="mt-6 text-gray-400 text-xs">
+            請確保環境光線充足，並將手掌面向鏡頭。
+        </div>
+    </div>
+
+    <script type="module">
+        const videoElement = document.getElementById('input_video');
+        const canvasElement = document.getElementById('output_canvas');
+        const canvasCtx = canvasElement.getContext('2d');
+        const gestureResult = document.getElementById('gesture-result');
+        const fingerDetails = document.getElementById('finger-details');
+        const statusDisplay = document.getElementById('status');
+
+        // 初始化 MediaPipe Hands
+        const hands = new Hands({
+            locateFile: (file) => {
+                return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;
+            }
+        });
+
+        hands.setOptions({
+            maxNumHands: 1,
+            modelComplexity: 1,
+            minDetectionConfidence: 0.7,
+            minTrackingConfidence: 0.5
+        });
+
+        hands.onResults(onResults);
+
+        // 核心邏輯：判斷手勢
+        function recognizeRPS(landmarks) {
+            // MediaPipe 手部 21 個節點座標
+            // 0: 手腕, 4: 拇指尖, 8: 食指尖, 12: 中指尖, 16: 無名指尖, 20: 小指尖
+            
+            // 判斷手指是否伸直 (y 座標越小代表在畫面上方，即伸直)
+            const isFingerUp = (tipIdx, pipIdx) => landmarks[tipIdx].y < landmarks[pipIdx].y;
+            
+            const indexUp = isFingerUp(8, 6);
+            const middleUp = isFingerUp(12, 10);
+            const ringUp = isFingerUp(16, 14);
+            const pinkyUp = isFingerUp(20, 18);
+            
+            // 拇指較特別，通常判斷其 x 座標與鄰近節點的關係（假設右手面朝前）
+            // 這裡簡單化處理，主要依賴其餘四指
+            
+            fingerDetails.innerText = `食:${indexUp?'↑':'↓'} 中:${middleUp?'↑':'↓'} 無:${ringUp?'↑':'↓'} 小:${pinkyUp?'↑':'↓'}`;
+
+            // 辨識規則：
+            // 石頭：四指全部收起
+            if (!indexUp && !middleUp && !ringUp && !pinkyUp) {
+                return "✊ 石頭";
+            }
+            // 布：四指全部伸出
+            if (indexUp && middleUp && ringUp && pinkyUp) {
+                return "✋ 布";
+            }
+            // 剪刀：食指跟中指伸出，其他收起
+            if (indexUp && middleUp && !ringUp && !pinkyUp) {
+                return "✌️ 剪刀";
+            }
+
+            return "未知";
+        }
+
+        function onResults(results) {
+            // 設定畫布大小
+            canvasElement.width = videoElement.videoWidth;
+            canvasElement.height = videoElement.videoHeight;
+
+            // 清除畫布
+            canvasCtx.save();
+            canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+            
+            // 繪製影像 (可選，這裡只繪製骨架在透明畫布上)
+            // canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+            if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+                statusDisplay.innerText = "偵測中...";
+                for (const landmarks of results.multiHandLandmarks) {
+                    // 繪製手部節點
+                    drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, {color: '#00FF00', lineWidth: 5});
+                    drawLandmarks(canvasCtx, landmarks, {color: '#FF0000', lineWidth: 2});
+                    
+                    // 執行手勢辨識
+                    const result = recognizeRPS(landmarks);
+                    gestureResult.innerText = result;
+                }
+            } else {
+                statusDisplay.innerText = "請將手放入畫面";
+                gestureResult.innerText = "—";
+                fingerDetails.innerText = "未偵測到手掌";
+            }
+            canvasCtx.restore();
+        }
+
+        // 啟動攝影機
+        const camera = new Camera(videoElement, {
+            onFrame: async () => {
+                await hands.send({image: videoElement});
+            },
+            width: 640,
+            height: 480
+        });
+        
+        camera.start().then(() => {
+            statusDisplay.innerText = "模型與攝影機準備就緒";
+            statusDisplay.classList.replace('text-blue-500', 'text-green-500');
+        }).catch(err => {
+            statusDisplay.innerText = "攝影機啟動失敗: " + err;
+            statusDisplay.classList.replace('text-blue-500', 'text-red-500');
+        });
+    </script>
+</body>
+</html>

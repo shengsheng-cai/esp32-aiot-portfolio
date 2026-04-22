@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 模型權重（自動下載）
+models/*.caffemodel
+models/*.task
+
+# Teachable Machine 模型（用戶自備）
+keras_Model.h5
+keras_model.h5
+
+# 錄影 / 輸出影像
+*.mp4
+output.jpg
+output.png
+
+# sample 圖片保留
+!sample/

@@ -1,0 +1,7 @@
+opencv-python
+numpy
+scipy
+mediapipe>=0.10.30
+matplotlib
+# tensorflow  # teachable.py 需要，建議獨立安裝：pip install tensorflow
+# pyserial    # gesture.py --serial 需要：pip install pyserial
