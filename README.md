@@ -45,6 +45,13 @@
 |--------|------|------|
 | [img-process-lab](practice/cv/img-process-lab/) | OpenCV 傳統影像處理學習實驗室：濾波 · 直方圖 · 人臉偵測 · QR · 攝影機 | OpenCV · Python |
 
+**Embedded · IoT**
+
+| 子專案 | 說明 | 技術 |
+|--------|------|------|
+| [esp32-sensor-lab](practice/iot/esp32-sensor-lab/) | ESP32 MicroPython 感測器模組庫：DHT11 · I2C LCD · SG90 舵機 · 繼電器 · 蜂鳴器，搭配 MQTT pipeline 與即時溫度儀表板 | MicroPython · MQTT · Flask · MongoDB |
+| [esp32-vision-mqtt](practice/iot/esp32-vision-mqtt/) | PC 端 OpenCV 即時影像辨識 + ESP32 伺服馬達追蹤：Haar/SSD/MobileNetSSD 人臉與物件追蹤、face_recognition 陌生人偵測、MQTT/Serial 雙傳輸層 | OpenCV · MobileNetSSD · face_recognition · paho-mqtt |
+
 **Web / Backend**
 
 | 子專案 | 說明 | 技術 |

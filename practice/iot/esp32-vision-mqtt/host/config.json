@@ -1,0 +1,11 @@
+{
+    "mqtt_broker" : "your.mqtt.broker.ip",
+    "mqtt_port"   : 1883,
+    "topic_head"  : "your_name/AIoT",
+
+    "topic_servo" : "/servo",
+    "topic_lcd"   : "/LCD",
+    "topic_relay" : "/relay",
+
+    "comment" : "改完後執行 python test_get_conf.py 驗證設定是否正確"
+}
