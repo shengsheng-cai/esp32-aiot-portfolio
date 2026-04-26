@@ -92,8 +92,8 @@ def tilt_demo():
         gy = _to_g(_read_axis(adc_y))
         gz = _to_g(_read_axis(adc_z))
 
-        roll  = math.atan2(gy, gz) * 180 / math.pi + 180
-        pitch = math.atan2(gx, gz) * 180 / math.pi + 180
+        roll  = math.atan2(gy, gz) * 180 / math.pi
+        pitch = math.atan2(gx, gz) * 180 / math.pi
         print("Roll={:.1f}°  Pitch={:.1f}°  (X={:.2f}G Y={:.2f}G Z={:.2f}G)".format(
             roll, pitch, gx, gy, gz))
         time.sleep_ms(200)

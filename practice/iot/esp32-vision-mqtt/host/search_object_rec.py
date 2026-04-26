@@ -30,7 +30,7 @@ parser.add_argument('-o', '--object', default=15, type=int,
 args = parser.parse_args()
 if args.object > 20 or args.object < 1:
     exit()
-obiectNum = args.object
+objectNum = args.object
 
 nowAngle = -1
 frame_x_center = 0
@@ -74,7 +74,7 @@ def main():
                 noface = 1
 
                 if len(detections) > 0:
-                    ixay = np.argwhere(detections[0, 0, :, 1] == obiectNum).flatten()
+                    ixay = np.argwhere(detections[0, 0, :, 1] == objectNum).flatten()
                     if len(ixay) > 0:
                         iix = np.argmax(np.take(detections[0, 0, :, 2], ixay))
                         i = ixay[iix]
