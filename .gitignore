@@ -7,3 +7,4 @@ node_modules/
 __pycache__/
 *.db
 practice/ai-ml/mnist-dl/training/data/
+practice/iot/esp32-module-lib/feature-list.md
