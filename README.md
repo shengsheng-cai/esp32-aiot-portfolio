@@ -51,7 +51,7 @@
 |--------|------|------|
 | [esp32-sensor-lab](practice/iot/esp32-sensor-lab/) | ESP32 MicroPython 感測器模組庫：DHT11 · I2C LCD · SG90 舵機 · 繼電器 · 蜂鳴器，搭配 MQTT pipeline 與即時溫度儀表板 | MicroPython · MQTT · Flask · MongoDB |
 | [esp32-vision-mqtt](practice/iot/esp32-vision-mqtt/) | PC 端 OpenCV 即時影像辨識 + ESP32 伺服馬達追蹤：Haar/SSD/MobileNetSSD 人臉與物件追蹤、face_recognition 陌生人偵測、MQTT/Serial 雙傳輸層 | OpenCV · MobileNetSSD · face_recognition · paho-mqtt |
-| [esp32-module-lib](practice/iot/esp32-module-lib/) | 職訓課程期間完整實作的 68 種 ESP32 MicroPython 模組範例：感測器 · 通訊 · 控制 · 介面 · 進階整合，含硬體接線圖與難度分級 | MicroPython · MQTT · BLE · OTA · I2C · SPI |
+| [esp32-module-lib](practice/iot/esp32-module-lib/) | 職訓課程期間完整實作的 68 種 ESP32 MicroPython 模組範例：感測器 · 通訊 · 控制 · 介面 · 進階整合，含難度分級 | MicroPython · MQTT · BLE · OTA · I2C · SPI |
 
 **Web / Backend**
 
