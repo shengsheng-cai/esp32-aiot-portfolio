@@ -10,7 +10,7 @@
 |------|---------|
 | **Web 全端** | HTML/CSS/JS · PHP/SQL · Vue · Node/Express · NodeRED |
 | **AI 應用** | PyTorch · CNN/RNN/VAE · ViT · OpenCV · RAG · MCP · AI Agent |
-| **嵌入式 · IoT** | Raspberry Pi · I2C/PWM/DHT · MQTT · Docker · MongoDB |
+| **嵌入式 · IoT** | ESP32 · MicroPython · I2C/PWM/DHT · MQTT · OpenCV · MongoDB |
 
 ---
 
