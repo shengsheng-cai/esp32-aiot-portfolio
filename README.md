@@ -8,7 +8,6 @@
 
 | 領域 | 主要技術 |
 |------|---------|
-| **Web 全端** | HTML/CSS/JS · PHP/SQL · Vue · Node/Express · NodeRED |
 | **AI 應用** | PyTorch · CNN/RNN/VAE · ViT · OpenCV · RAG · MCP · AI Agent |
 | **嵌入式 · IoT** | ESP32 · MicroPython · I2C/PWM/DHT · MQTT · OpenCV · MongoDB |
 
@@ -17,8 +16,7 @@
 ## 技術方向
 
 **主要方向 · 軟體工程（Python / FastAPI / React）**
-職訓打下 Python 與 Web 全端基礎（Vue / Node / Express），
-以此延伸至 FastAPI + React 技術棧，目標全端軟體工程職位。
+職訓打下 Python 基礎，以此延伸至 FastAPI + React 技術棧，目標全端軟體工程職位。
 
 **延伸方向 · AIoT（ESP32 + AI + 感測器）**
 結合 9 年可靠度工程背景（硬體除錯 · 環境測試 · 法規標準），
@@ -53,7 +51,7 @@
 | [esp32-vision-mqtt](practice/iot/esp32-vision-mqtt/) | PC 端 OpenCV 即時影像辨識 + ESP32 伺服馬達追蹤：Haar/SSD/MobileNetSSD 人臉與物件追蹤、face_recognition 陌生人偵測、MQTT/Serial 雙傳輸層 | OpenCV · MobileNetSSD · face_recognition · paho-mqtt |
 | [esp32-module-lib](practice/iot/esp32-module-lib/) | 職訓課程期間完整實作的 68 種 ESP32 MicroPython 模組範例：感測器 · 通訊 · 控制 · 介面 · 進階整合，含難度分級 | MicroPython · MQTT · BLE · OTA · I2C · SPI |
 
-**Web / Backend**
+**Backend**
 
 | 子專案 | 說明 | 技術 |
 |--------|------|------|
