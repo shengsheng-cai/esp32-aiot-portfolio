@@ -1,6 +1,7 @@
 _originals/
 .venv/
 .DS_Store
+.vscode/
 *.pth
 *.pt
 node_modules/
