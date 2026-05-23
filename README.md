@@ -1,6 +1,6 @@
-# Embedded / AIoT Learning Portfolio
+# ESP32 / AIoT Learning Portfolio
 
-泰山職訓局 2025~2026 課程的重寫實作集，聚焦 ESP32 / MicroPython 嵌入式與 AIoT 應用。結合 9 年可靠度工程背景（硬體除錯 · 環境測試 · 法規標準），切入「硬體出身 × 嵌入式 / AIoT」。
+泰山職訓局 2025~2026 課程的重寫實作集，聚焦 ESP32 / MicroPython 嵌入式與 AIoT 應用。主軸是 `practice/iot/` 的 ESP32 實作；`ai-ml/`、`cv/`、`web/` 以支援能力展示為定位。結合 9 年可靠度工程背景（硬體除錯 · 環境測試 · 法規標準），切入「硬體出身 × 嵌入式 / AIoT」。
 
 > **Validation note**：部分 ESP32 範例為程式層級練習與架構整理，尚未全數完成實機接線驗證；各子專案 README 標明驗證狀態。
 
@@ -16,7 +16,7 @@
 
 ---
 
-## 主要作品 · Embedded / AIoT
+## 主要作品 · ESP32 / AIoT
 
 | 專案 | 說明 | 技術 |
 |------|------|------|
