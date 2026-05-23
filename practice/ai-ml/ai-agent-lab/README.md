@@ -36,11 +36,28 @@ cp .env.example .env   # 填入 GEMINI_API_KEY
 
 ---
 
+## 前置條件（Prerequisites）
+
+- **Gemini API key（必要）**：所有模組都會 `load_dotenv()` 並讀取 `GEMINI_API_KEY`（embedding、RAG、Agent、Vision 皆然）。沒設 key 無法執行任何需要呼叫模型的指令。請 `cp .env.example .env` 後填入。
+- **資料庫需自行建立**：課表 DB（`course.db`）與法規向量庫（`rag/chroma_db/`）**都不在 git 內**，clone 後不存在，需依下方「資料」段建立：
+  - 課表 DB：`make mcp-setup`（或第一次 `make dev` 會自動建）。
+  - 法規向量庫：`make rag-pdf-setup PDF=rag/data/traffic_law.txt`（會呼叫 Gemini Embedding，需網路與 API key）。
+- **MCP server 為背景服務**：`make agent-multi` 需先 `make dev` 啟動雙 MCP server（CourseServer :8802、LawRAGServer :8803）。`make dev` 會 foreground 阻塞，請另開終端機跑 agent。
+- **網路 / 額度**：embedding 與 LLM 呼叫走 Google Gemini 線上 API；`common/embedding.py` 內建每分鐘限 100 筆的節流（超過自動 sleep 62 秒），大量文件建庫會明顯變慢。
+
+## 驗證狀態（Validation Status）
+
+- **程式層級**：Makefile target、各入口腳本的環境變數（`GEMINI_API_KEY`）、模型名稱（`gemini-embedding-001`、`gemini-2.5-flash-lite`）、FAISS / Chroma / FastMCP 用法與本 README 對照一致。
+- **DB 路徑已更正**：先前 README 把課表 DB 標為 `mcp/courses.db`，實際 `setup_db.py` 與 `course_server.py` 使用相對工作目錄的 `course.db`（`make dev` 從 repo 根目錄執行，故落在根目錄）。已修正。
+- **未由本品檢流程實跑**：本次未安裝套件、未設定 API key、未建 DB、未啟動 server，端到端執行（含 Gemini 線上呼叫）以擁有者環境為準。
+
+---
+
 ## 資料
 
 | 資料 | 位置 | 建立方式 |
 |------|------|---------|
-| 課表（SQLite） | `mcp/courses.db` | `make dev`（自動建立） |
+| 課表（SQLite） | `course.db`（repo 根目錄） | `make dev` 或 `make mcp-setup`（自動建立） |
 | 法規向量庫（Chroma） | `rag/chroma_db/` | `make rag-pdf-setup PDF=rag/data/traffic_law.txt` |
 | 法規原文 | `rag/data/traffic_law.txt` | 道路交通管理處罰條例（政府 OpenData） |
 

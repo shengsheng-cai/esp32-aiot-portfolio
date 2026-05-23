@@ -36,6 +36,29 @@ pip install -r requirements.txt
 
 ---
 
+## 前置條件（Prerequisites）
+
+- Python + `requirements.txt`（torch / torchvision / Pillow / matplotlib / numpy / tqdm）。AnimeGANv2 不在 requirements，靠 `torch.hub` 動態載入，不需另外 `pip install`。
+- **資料集自動下載**：`transfer`（CIFAR-10，約 170MB）、`vae`（MNIST，約 11MB）首次執行會自動下載，需要網路。
+- **模型權重 / 預訓練網路需網路**：
+  - transfer 用 torchvision 的 ImageNet 預訓練 ResNet50 / EfficientNet（首次自動下載）。
+  - style 用 VGG19、dream 用 InceptionV3（torchvision 預訓練，首次自動下載）。
+  - cartoonize 用 `torch.hub` 從 `bryandlee/animegan2-pytorch` 下載 AnimeGANv2 generator 權重（paprika / face_paint_512_v2 / celeba_distill），首次自動下載並 cache 於 `~/.cache/torch/hub/`。
+- **訓練 / 推論產物不在 git 內**：`*.pth`（`resnet50_cifar10.pth`、`vae.pth`、`denoise_ae.pth` 等）與結果 `*.png` 都未納入 git，clone 後不存在，需自行執行對應 `make` target 產生。
+- **裝置限制**：
+  - transfer / vae / cartoonize 自動選 `cuda > mps > cpu`，可在 Apple Silicon 用 MPS 加速。
+  - **style transfer 例外**：LBFGS 不支援 MPS，MPS 上會跑出錯誤結果，務必加 `--device cpu`（`make smoke` 已內建此 flag）。
+  - 純 CPU 可跑但慢（見「指令總覽」時間欄）。
+
+## 驗證狀態（Validation Status）
+
+- **程式層級**：Makefile target、各腳本的參數（`--model` / `--mode` / `--device` / `--styles` 等）、device 邏輯、cartoonize 的 `torch.hub` 載入方式與本 README 對照一致。
+- **cartoonize 的 AnimeGANv2 API 描述屬實**：對照 `cartoonize/cartoonize.py`，確實使用 `torch.hub.load("bryandlee/animegan2-pytorch:main", "generator", pretrained=<key>, trust_repo=True)`，三種風格對應的權重 key 為 `paprika` / `face_paint_512_v2` / `celeba_distill`，與 README 風格表一致；README 的「torch.hub 自動下載、不需額外裝 TF」描述正確，未發現呼叫不存在的 API。
+- **本機實跑（部分）**：擁有者本機已存在 `resnet50_cifar10.pth`、`vae.pth`、`denoise_ae.pth` 及 `result_style.png` / `result_dream.png` / `denoise_result.png` / `latent_space.png` / `label_clusters.png`，顯示 transfer / vae / style / dream 模組在擁有者環境實際產出過；但這些檔不入 git。
+- **未由本品檢流程實跑**：本次未安裝套件、未下載任何權重、未實際執行（含 cartoonize 的 torch.hub 下載）。cartoonize 端到端推論結果以擁有者環境為準。
+
+---
+
 ## 快速驗證
 
 重頭開始（全新環境）：

@@ -22,7 +22,7 @@ mcp-rag:
 	python mcp/law_server.py
 
 dev:
-	@test -f mcp/courses.db || python mcp/setup_db.py
+	@test -f course.db || python mcp/setup_db.py
 	@bash dev_start.sh
 
 agent-react:

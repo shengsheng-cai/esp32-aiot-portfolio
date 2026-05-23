@@ -65,6 +65,22 @@ React 前端（信心度色條排序顯示）
 
 ---
 
+## 前置條件（Prerequisites）
+
+- Python 3.13、Node.js（前端 Vite）、（選用）Docker / Docker Compose。
+- **模型權重不在 git 內**（`models/*.pth` 已被 `.gitignore` 排除）。clone 後 `models/` 是空的，**必須先自行訓練**至少 SimpleNN / SimpleCNN / ViT_Custom，後端才會載入對應模型（見下方「快速啟動 → 訓練模型」）。後端啟動時只載入 `models/` 裡實際存在的 `.pth`，缺檔的模型會自動跳過。
+- `ViT_ImageNet` 與 `ViT_3rd_MNIST` 由 HuggingFace 線上抓取（`google/vit-base-patch16-224`、`farleyknight-org-username/vit-base-mnist`），**首次啟動需要網路**下載權重，之後 cache 在 `~/.cache/huggingface`。無網路時這兩個模型會載入失敗並跳過，其餘模型仍可運作。
+- **推論裝置**：後端（`backend/app.py`）只判斷 CUDA，否則用 CPU（**不使用 MPS**）；Docker 版以 `CUDA_VISIBLE_DEVICES=""` 強制 CPU。訓練腳本則支援 MPS / CUDA / CPU。
+- HuggingFace fine-tune 的兩個模型（`ViT_HF_4060`、`ViT_HF_BestTuned`）為選用，需 `make train-hf` 自行訓練後才會出現。
+
+## 驗證狀態（Validation Status）
+
+- **程式層級**：Makefile target、後端路由、模型載入邏輯與本 README 指令對照一致。
+- **本機實跑**：擁有者本機 `models/` 內已存在 5 個自訓 `.pth`（SimpleNN / SimpleCNN / ViT_Custom / ViT_HF_4060 / ViT_HF_BestTuned），表 README 列出的模型確實訓練並載入過；但這些 `.pth` 不入 git，他人 clone 後需自行重訓。
+- **未由本品檢流程實跑**：本次未實際安裝套件、未重新訓練、未啟動服務或 Docker，故端到端流程（含 HF 線上下載）以擁有者環境為準。
+
+---
+
 ## 快速啟動
 
 ### 本地開發
