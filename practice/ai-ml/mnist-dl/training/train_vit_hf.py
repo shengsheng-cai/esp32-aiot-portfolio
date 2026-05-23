@@ -122,7 +122,7 @@ def train_best(device, processor):
     start_epoch = 0
     best_acc = 0.0
     if ckpt_path.exists():
-        ckpt = torch.load(ckpt_path, map_location=device)
+        ckpt = torch.load(ckpt_path, map_location=device, weights_only=True)
         model.load_state_dict(ckpt["model"])
         optimizer.load_state_dict(ckpt["optimizer"])
         scheduler.load_state_dict(ckpt["scheduler"])

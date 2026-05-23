@@ -45,6 +45,12 @@ cp .env.example .env   # 填入 GEMINI_API_KEY
 - **MCP server 為背景服務**：`make agent-multi` 需先 `make dev` 啟動雙 MCP server（CourseServer :8802、LawRAGServer :8803）。`make dev` 會 foreground 阻塞，請另開終端機跑 agent。
 - **網路 / 額度**：embedding 與 LLM 呼叫走 Google Gemini 線上 API；`common/embedding.py` 內建每分鐘限 100 筆的節流（超過自動 sleep 62 秒），大量文件建庫會明顯變慢。
 
+## 安全注意（ReAct Agent）
+
+`make agent-react` 的 ReAct 迴圈含 `bash` / `write` 工具（`agent/react.py`），會**直接執行或寫入模型產生的命令與檔案**，無沙箱限制。
+- **僅限本地學習 / 受控環境**使用。
+- **請勿**對不可信的 prompt、或在生產環境執行。
+
 ## 驗證狀態（Validation Status）
 
 - **程式層級**：Makefile target、各入口腳本的環境變數（`GEMINI_API_KEY`）、模型名稱（`gemini-embedding-001`、`gemini-2.5-flash-lite`）、FAISS / Chroma / FastMCP 用法與本 README 對照一致。

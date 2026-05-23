@@ -51,7 +51,7 @@ async def load_models():
         path = MODEL_DIR / fname
         if path.exists():
             model = cls().to(device)
-            model.load_state_dict(torch.load(path, map_location=device))
+            model.load_state_dict(torch.load(path, map_location=device, weights_only=True))
             model.eval()
             loaded_models[name] = {"type": "mnist", "model": model}
             print(f"Loaded: {name}")
@@ -75,7 +75,7 @@ async def load_models():
                 break
             try:
                 model = ViTForImageClassification(hf_config).to(device)
-                model.load_state_dict(torch.load(MODEL_DIR / fname, map_location=device))
+                model.load_state_dict(torch.load(MODEL_DIR / fname, map_location=device, weights_only=True))
                 model.eval()
                 loaded_models[name] = {"type": "hf_vit", "model": model, "processor": vit_processor}
                 print(f"Loaded: {name}")
