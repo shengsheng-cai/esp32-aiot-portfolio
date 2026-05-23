@@ -1,52 +1,35 @@
-# ESP32 MicroPython 模組化感測器範例
+# esp32-module-lib
 
-ESP32 MicroPython 常用功能的範例程式碼，以及硬體接線參考圖。
+ESP32 MicroPython 模組範例庫。
 
-> **注意**：本庫為課程學習記錄，程式碼未全數在硬體上驗證，使用前請依實際板子與 MicroPython 版本測試調整。
+## What I Built
+68 種 ESP32 MicroPython 模組範例，依功能分 8 類（核心技術 / 感測器 / 輸出控制 / 人機介面 / 無線通訊 / 即時時鐘 / 整合範例 / 驅動庫），每個範例含難度分級，可直接燒錄執行。職訓課程期間整理，作為 ESP32 周邊控制的完整參考。
 
----
+## Skills Demonstrated
+- GPIO / ADC / PWM / 硬體中斷 / 深度睡眠 + 看門狗 / 雙核心
+- I2C（LCD · OLED）· SPI（TFT ST7735）· UART
+- 感測器：DHT11 · MQ-2 · ADXL335 · HX711 · MAX30100
+- 輸出控制：繼電器 · 直流/步進/伺服馬達 · WS2812B · MAX7219
+- 無線：WiFi · Web Server · MQTT · WebSocket · BLE · ESP-NOW · OTA
 
-## 硬體參考圖 (`hardware/`)
+## Hardware / Interface
+ESP32（30/38-pin）· GPIO · ADC · PWM · I2C · SPI · UART · WiFi · BLE
+> 各款板子腳位差異請查板廠官方 pinout（本庫不附第三方接線圖）。
 
-開始之前先確認你用的是哪一塊板子，腳位定義會不一樣。
+## How to Run
+1. 燒錄 MicroPython firmware 至 ESP32（[micropython.org](https://micropython.org/download/ESP32_GENERIC/)）
+2. 用 [Thonny](https://thonny.org) 或 `mpremote` 上傳對應 `firmware/<分類>/*.py`
+3. 依範例頂部註解改 PIN 腳後執行
 
-| 檔案 | 說明 |
-|------|------|
-| `ESP32-30pin-GPIO-mapping.png` | 30 腳位版 GPIO 對應表（最常見款） |
-| `ESP32-DEV-KIT-DevKitC-v4-pinout-(nodemcu_32s).png` | DevKitC v4 / NodeMCU-32S 腳位圖 |
-| `ESP32_DOIT_KIT_Pinout.jpg` | DOIT 開發板腳位圖 |
-| `ESP32-WeMos-LOLIN-D32-pinout-mischianti.jpg` | Wemos LOLIN D32 腳位圖 |
-| `ESP32-WeMos-LOLIN-D32-4mb-flash-schematic.jpg` | LOLIN D32 電路圖 |
-| `ESP32-CAM-pinout-mischianti-1536x727.jpg` | ESP32-CAM 腳位圖 |
-| `ESP32-I2C-hardware-wiring.png` | I2C 接線方式（SDA/SCL） |
+## Validation Status
+**程式層級練習** — 範例為課程學習整理，未全數在實機上驗證；使用前請依實際板子與 MicroPython 版本測試調整。
 
----
-
-## 韌體範例 (`firmware/`)
-
-所有範例都是 MicroPython，直接燒錄到 ESP32 執行。
-
-### 環境需求
-
-- MicroPython firmware 已燒錄至 ESP32
-- 建議工具：[Thonny IDE](https://thonny.org)（免費，適合初學）
-
-
-### 目錄結構
-
-```
-firmware/
-  core-skills/    核心技術（中斷、睡眠、PWM、ADC、Flash 儲存、雙核心）
-  sensors/        感測器（溫濕度、氣體、加速度、心率、秤重等）
-  control/        輸出控制（繼電器、馬達、WS2812B 燈帶、MAX7219）
-  interface/      人機介面（OLED、TFT、LCD、Keypad、旋轉編碼器等）
-  networking/     無線通訊（WiFi、Web Server、MQTT、WebSocket、BLE、OTA）
-  time/           即時時鐘（DS1302、DS3231）
-  advanced/       整合範例（DHT11 Web Server、Keypad 門禁系統）
-  lib/            依賴庫（LCD 驅動、ST7735 TFT 驅動）
-```
+## Next Step
+挑最小組合做實機驗證（如 `firmware/sensors/dht.py` + `firmware/interface/i2c_lcd.py` + `firmware/networking/mqtt_publish.py`），補一張接線照片與終端 log。
 
 ---
+
+## 模組總覽
 
 ### 核心技術 (`core-skills/`)
 
@@ -58,8 +41,6 @@ firmware/
 | `interrupt.py` | GPIO 硬體中斷 | ⭐⭐ |
 | `sleep_wdt.py` | 深度睡眠 + 看門狗計時器 | ⭐⭐ |
 | `dual_core.py` | 雙核心分工（Core0 / Core1） | ⭐⭐⭐ |
-
----
 
 ### 感測器 (`sensors/`)
 
@@ -73,8 +54,6 @@ firmware/
 | `max471_hx711.py` | MAX471 電壓電流 + HX711 秤重 | ⭐⭐ |
 | `max30100.py` | MAX30100 心率血氧 | ⭐⭐⭐ |
 
----
-
 ### 輸出控制 (`control/`)
 
 | 檔案 | 功能 | 難度 |
@@ -86,8 +65,6 @@ firmware/
 | `stepper.py` | 步進馬達精確控制 | ⭐⭐ |
 | `ws2812b.py` | WS2812B 全彩 RGB 燈帶 | ⭐⭐ |
 | `matrix_led_max7219.py` | 8x8 矩陣 LED（MAX7219） | ⭐⭐ |
-
----
 
 ### 人機介面 (`interface/`)
 
@@ -104,10 +81,7 @@ firmware/
 | `oled_ssd1306.py` | OLED SSD1306 128x64（I2C） | ⭐⭐ |
 | `tft_st7735.py` | TFT 彩色螢幕 ST7735（SPI） | ⭐⭐ |
 
-> `i2c_lcd.py` 需要 `lib/lcd_api.py` 和 `lib/machine_i2c_lcd.py`  
-> `tft_st7735.py` 需要 `lib/st7735/` 目錄
-
----
+> `i2c_lcd.py` 需要 `lib/lcd_api.py` 和 `lib/machine_i2c_lcd.py`；`tft_st7735.py` 需要 `lib/st7735/` 目錄
 
 ### 無線通訊 (`networking/`)
 
@@ -125,10 +99,7 @@ firmware/
 | `nrf24l01.py` | nRF24L01 2.4GHz 無線收發 | ⭐⭐ |
 | `ota.py` | OTA 無線燒錄（WebREPL / HTTP 上傳） | ⭐⭐⭐ |
 
-> `async_web_server.py` 需要另外安裝 microdot：  
-> `mpremote mip install github:miguelgrinberg/microdot/src/microdot.py`
-
----
+> `async_web_server.py` 需安裝 microdot：`mpremote mip install github:miguelgrinberg/microdot/src/microdot.py`
 
 ### 即時時鐘 (`time/`)
 
@@ -137,8 +108,6 @@ firmware/
 | `ds1302.py` | DS1302 RTC（精度較低） | ⭐ |
 | `ds3231.py` | DS3231 RTC（溫度補償，更準確） | ⭐ |
 
----
-
 ### 整合範例 (`advanced/`)
 
 | 檔案 | 功能 | 難度 |
@@ -146,20 +115,15 @@ firmware/
 | `dht11_web_server.py` | DHT11 + Web Server，網頁顯示溫濕度 | ⭐⭐ |
 | `keypad_lcd_locker.py` | Keypad + LCD 門禁管制機 | ⭐⭐ |
 
----
+### 依賴庫 (`lib/`)
 
-## 依賴庫 (`lib/`)
-
-不需要修改，直接上傳到 ESP32 的 `/lib/` 目錄即可。
+直接上傳到 ESP32 的 `/lib/` 目錄即可，不需修改。
 
 | 路徑 | 說明 | 被誰使用 |
 |------|------|----------|
 | `lib/lcd_api.py` | I2C LCD 底層 API | `interface/i2c_lcd.py` |
 | `lib/machine_i2c_lcd.py` | I2C LCD MicroPython 驅動 | `interface/i2c_lcd.py` |
-| `lib/st7735/ST7735.py` | ST7735 TFT 驅動 | `interface/tft_st7735.py` |
-| `lib/st7735/sysfont.py` | 系統字型 | `interface/tft_st7735.py` |
-| `lib/st7735/seriffont.py` | Serif 字型 | `interface/tft_st7735.py` |
-| `lib/st7735/terminalfont.py` | 終端機字型 | `interface/tft_st7735.py` |
+| `lib/st7735/` | ST7735 TFT 驅動 + 字型 | `interface/tft_st7735.py` |
 
 ---
 
@@ -168,8 +132,5 @@ firmware/
 | 符號 | 程度 |
 |------|------|
 | ⭐ | 入門：照程式碼改 PIN 腳就能用 |
-| ⭐⭐ | 中等：需要理解參數意義或搭配其他模組 |
-| ⭐⭐⭐ | 進階：需要額外設定或對通訊協定有基本了解 |
-
----
-
+| ⭐⭐ | 中等：需理解參數或搭配其他模組 |
+| ⭐⭐⭐ | 進階：需額外設定或對通訊協定有基本了解 |
