@@ -54,8 +54,7 @@ cp .env.example .env   # 填入 GEMINI_API_KEY
 ## 驗證狀態（Validation Status）
 
 - **程式層級**：Makefile target、各入口腳本的環境變數（`GEMINI_API_KEY`）、模型名稱（`gemini-embedding-001`、`gemini-2.5-flash-lite`）、FAISS / Chroma / FastMCP 用法與本 README 對照一致。
-- **DB 路徑已更正**：先前 README 把課表 DB 標為 `mcp/courses.db`，實際 `setup_db.py` 與 `course_server.py` 使用相對工作目錄的 `course.db`（`make dev` 從 repo 根目錄執行，故落在根目錄）。已修正。
-- **未由本品檢流程實跑**：本次未安裝套件、未設定 API key、未建 DB、未啟動 server，端到端執行（含 Gemini 線上呼叫）以擁有者環境為準。
+- **尚未端到端實跑驗證**：README 與程式對照一致，但未實際安裝套件、設定 API key、建 DB、啟動 server 跑過；端到端行為（含 Gemini 線上呼叫）以實機為準。
 
 ---
 
