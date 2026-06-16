@@ -1,8 +1,8 @@
 # ESP32 / AIoT Learning Portfolio
 
-泰山職訓局 2025~2026 課程的重寫實作集，聚焦 ESP32 / MicroPython 嵌入式與 AIoT 應用。主軸是 `practice/iot/` 的 ESP32 實作；`ai-ml/`、`cv/`、`web/` 以支援能力展示為定位。結合 9 年可靠度工程背景（硬體除錯 · 環境測試 · 法規標準），切入「硬體出身 × 嵌入式 / AIoT」。
+泰山職訓局 2025~2026 課程的重寫實作集，涵蓋 ESP32 / MicroPython 嵌入式、AIoT 通訊、AI/ML 應用與 CV。`ai-ml/ai-agent-lab`（RAG · MCP · ReAct Agent）為最貼近 AI 應用工作的子專案；`practice/iot/` 的 ESP32 實作為嵌入式學習紀錄。
 
-> **Validation note**：部分 ESP32 範例為程式層級練習與架構整理，尚未全數完成實機接線驗證；各子專案 README 標明驗證狀態。
+各子專案為職訓期間學習實作整理，程式邏輯已核對；IoT 韌體待實機接線驗證，AI/ML · CV · Web 子專案驗證狀態詳見各自 README。
 
 ---
 
@@ -23,8 +23,6 @@
 | [esp32-module-lib](practice/iot/esp32-module-lib/) | 45 種 ESP32 MicroPython 模組範例：感測器 · 通訊 · 控制 · 介面 · 進階整合，含難度分級 | MicroPython · MQTT · BLE · OTA · I2C · SPI |
 | [esp32-sensor-lab](practice/iot/esp32-sensor-lab/) | ESP32 感測器節點：DHT11 → I2C LCD → MQTT 資料流，含 Flask + MongoDB 即時溫度儀表板（dashboard 模板需補齊） | MicroPython · MQTT · Flask · MongoDB |
 | [esp32-vision-mqtt](practice/iot/esp32-vision-mqtt/) | PC OpenCV 影像辨識 → MQTT/Serial → ESP32 伺服馬達追蹤 | OpenCV · MobileNetSSD · paho-mqtt |
-
-> IoT 專案總入口：[practice/iot/](practice/iot/)
 
 ---
 
