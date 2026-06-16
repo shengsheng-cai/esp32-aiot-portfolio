@@ -2,9 +2,6 @@
 WS2812B RGB LED 燈帶控制
 Control - ws2812b
 
-原始課程: 35.LED燈帶 WS2818 / 45.LED燈帶 WS2818
-平台: ESP32 MicroPython
-
 功能:
   跑馬燈、彩虹燈效果
   MicroPython 內建 neopixel 模組，不需額外函式庫
@@ -24,7 +21,7 @@ import time
 from machine import Pin
 from neopixel import NeoPixel
 
-LED_PIN   = 2
+LED_PIN = 2
 LED_COUNT = 8
 
 np = NeoPixel(Pin(LED_PIN), LED_COUNT)

@@ -2,9 +2,6 @@
 直流馬達控制 (L298N / L9110)
 Control - dc_motor
 
-原始課程: 20.ESP32_直流馬達模組 L298N與L9110
-平台: ESP32 MicroPython
-
 功能:
   PWM 控制直流馬達轉速與方向
   旋鈕（ADC）控制：中間值停止，往上正轉，往下反轉
@@ -40,7 +37,7 @@ from machine import Pin, PWM, ADC
 IN3_PIN = 16
 IN4_PIN = 17
 PWM_PIN = 4
-VR_PIN  = 36
+VR_PIN = 36
 
 in3 = Pin(IN3_PIN, Pin.OUT)
 in4 = Pin(IN4_PIN, Pin.OUT)
@@ -76,11 +73,11 @@ def vr_control():
     vr = ADC(Pin(VR_PIN))
     vr.atten(ADC.ATTN_11DB)
 
-    DEAD_LOW  = 1780   # 中間死區下限（停止）
-    DEAD_HIGH = 1880   # 中間死區上限（停止）
+    DEAD_LOW = 1780  # 中間死區下限（停止）
+    DEAD_HIGH = 1880  # 中間死區上限（停止）
 
     while True:
-        val = vr.read()   # 0~4095
+        val = vr.read()  # 0~4095
 
         if val > DEAD_HIGH:
             speed = (val - DEAD_HIGH) * 65535 // (4095 - DEAD_HIGH)

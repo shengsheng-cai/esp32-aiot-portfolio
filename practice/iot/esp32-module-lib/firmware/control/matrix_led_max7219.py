@@ -2,8 +2,6 @@
 8x8 矩陣 LED 控制 (MAX7219)
 Control - matrix_led_max7219
 
-原始課程: 46.ESP32_8x8 Matrix LED(MAX7219)
-平台: ESP32 MicroPython
 
 功能:
   點亮單顆 LED、整列輸出、文字捲動跑馬燈
@@ -31,30 +29,32 @@ import time
 from machine import Pin, SPI
 import max7219
 
-SPI_ID   = 1
-CLK_PIN  = 18
+SPI_ID = 1
+CLK_PIN = 18
 MOSI_PIN = 23
-CS_PIN   = 21
-NUM_DEVICES = 1   # 串接模組數量
+CS_PIN = 21
+NUM_DEVICES = 1  # 串接模組數量
 
-spi = SPI(SPI_ID, baudrate=10000000, polarity=0, phase=0,
-          sck=Pin(CLK_PIN), mosi=Pin(MOSI_PIN))
-cs  = Pin(CS_PIN, Pin.OUT)
+spi = SPI(
+    SPI_ID, baudrate=10000000, polarity=0, phase=0, sck=Pin(CLK_PIN), mosi=Pin(MOSI_PIN)
+)
+cs = Pin(CS_PIN, Pin.OUT)
 
 display = max7219.Matrix8x8(spi, cs, NUM_DEVICES)
-display.brightness(4)   # 0~15
+display.brightness(4)  # 0~15
 
 
 # ── 點亮單顆 LED ──────────────────────────────────────────────
 def test_single_pixel():
     display.fill(0)
-    display.pixel(2, 0, 1)   # (col, row, on)
+    display.pixel(2, 0, 1)  # (col, row, on)
     display.show()
     time.sleep_ms(1000)
 
 
 # ── 笑臉圖案（整列輸出）──────────────────────────────────────
 SMILE = [0x3C, 0x42, 0xA5, 0x81, 0xA5, 0x99, 0x42, 0x3C]
+
 
 def show_smile():
     display.fill(0)

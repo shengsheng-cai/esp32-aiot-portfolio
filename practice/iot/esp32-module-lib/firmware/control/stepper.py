@@ -2,9 +2,6 @@
 步進馬達 Stepper Motor 控制 (ULN2003 + 28BYJ-48)
 Control - stepper
 
-原始課程: 19.ESP32_步進馬達 / 27.步進馬達
-平台: ESP32 MicroPython
-
 硬體規格 (28BYJ-48):
   額定電壓: 5V DC
   每轉步數: 2048 步（含減速比 1:64）
@@ -30,7 +27,7 @@ from machine import Pin
 
 IN1 = Pin(19, Pin.OUT)
 IN2 = Pin(18, Pin.OUT)
-IN3 = Pin(5,  Pin.OUT)
+IN3 = Pin(5, Pin.OUT)
 IN4 = Pin(17, Pin.OUT)
 
 COILS = [IN1, IN2, IN3, IN4]
@@ -43,8 +40,8 @@ STEP_SEQ = [
     [0, 0, 0, 1],
 ]
 
-STEPS_PER_REV = 2048   # 轉一圈所需步數
-STEP_DELAY_MS = 3      # 每步延時（ms），最低約 2~3ms
+STEPS_PER_REV = 2048  # 轉一圈所需步數
+STEP_DELAY_MS = 3  # 每步延時（ms），最低約 2~3ms
 
 
 def step_once(seq_index: int):

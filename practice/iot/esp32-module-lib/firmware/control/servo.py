@@ -2,9 +2,6 @@
 伺服馬達 Servo Motor 控制
 Control - servo
 
-原始課程: 16.ESP32_伺服馬達 / 20.伺服馬達 Servo Motor
-平台: ESP32 MicroPython
-
 功能:
   以 PWM 控制 SG90 伺服馬達角度（0~180 度）
   範例 1: 自動來回掃描 0→180→0
@@ -34,10 +31,10 @@ import time
 from machine import Pin, PWM, ADC
 
 SERVO_PIN = 13
-VR_PIN    = 34
+VR_PIN = 34
 
-PULSE_MIN = 1638   # 0°
-PULSE_MAX = 7864   # 180°
+PULSE_MIN = 1638  # 0°
+PULSE_MAX = 7864  # 180°
 
 servo = PWM(Pin(SERVO_PIN), freq=50)
 
@@ -63,9 +60,9 @@ def sweep():
 # ── 範例 2：旋鈕控制角度 ─────────────────────────────────────
 def vr_control():
     vr = ADC(Pin(VR_PIN))
-    vr.atten(ADC.ATTN_11DB)   # 輸入範圍 0~3.3V
+    vr.atten(ADC.ATTN_11DB)  # 輸入範圍 0~3.3V
     while True:
-        val   = vr.read()      # 0~4095
+        val = vr.read()  # 0~4095
         angle = val * 180 // 4095
         set_angle(angle)
         time.sleep_ms(15)

@@ -2,9 +2,6 @@
 PWM 輸出控制
 Control - pwm
 
-原始課程: 9.ESP32_PWM
-平台: ESP32 MicroPython
-
 功能:
   以 PWM 控制 LED 亮度（呼吸燈效果）
   ESP32 幾乎每支 GPIO 都可輸出 PWM
@@ -21,8 +18,8 @@ Control - pwm
 import time
 from machine import Pin, PWM
 
-LED_PIN  = 5
-FREQ     = 1000   # Hz
+LED_PIN = 5
+FREQ = 1000  # Hz
 MAX_DUTY = 65535  # 16-bit resolution
 
 led = PWM(Pin(LED_PIN), freq=FREQ)

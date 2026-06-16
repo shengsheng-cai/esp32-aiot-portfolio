@@ -2,9 +2,6 @@
 繼電器 Relay 控制
 Control - relay
 
-原始課程: 12.ESP32_繼電器Relay / 30.繼電器Relay
-平台: ESP32 MicroPython
-
 功能:
   透過序列埠輸入控制繼電器 ON/OFF
   傳送 '1' → 繼電器吸合（HIGH）
@@ -36,9 +33,9 @@ while True:
     if not sys.stdin.any():
         continue
     cmd = sys.stdin.read(1)
-    if cmd == '1':
+    if cmd == "1":
         relay.value(1)
         print("Relay ON")
-    elif cmd == '0':
+    elif cmd == "0":
         relay.value(0)
         print("Relay OFF")

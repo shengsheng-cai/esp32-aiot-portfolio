@@ -22,7 +22,7 @@ ESP32（30/38-pin）· GPIO · ADC · PWM · I2C · SPI · UART · WiFi · BLE
 3. 依範例頂部註解改 PIN 腳後執行
 
 ## Validation Status
-**程式層級練習** — 範例為課程學習整理，未全數在實機上驗證；使用前請依實際板子與 MicroPython 版本測試調整。
+**程式層級練習，邏輯與結構已核對** — 範例為課程學習整理，未全數在實機上驗證；使用前請依實際板子與 MicroPython 版本測試調整。
 
 ## Next Step
 挑最小組合做實機驗證（如 `firmware/sensors/dht.py` + `firmware/interface/i2c_lcd.py` + `firmware/networking/mqtt_publish.py`），補一張接線照片與終端 log。
@@ -112,8 +112,7 @@ ESP32（30/38-pin）· GPIO · ADC · PWM · I2C · SPI · UART · WiFi · BLE
 
 | 檔案 | 功能 | 難度 |
 |------|------|------|
-| `dht11_web_server.py` | DHT11 + Web Server，網頁顯示溫濕度 | ⭐⭐ |
-| `keypad_lcd_locker.py` | Keypad + LCD 門禁管制機 | ⭐⭐ |
+| `keypad_dht11.py` | Keypad 門禁 + DHT11 Web Server，PIN 解鎖後網頁才顯示溫濕度 | ⭐⭐⭐ |
 
 ### 依賴庫 (`lib/`)
 
