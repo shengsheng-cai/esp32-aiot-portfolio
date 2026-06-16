@@ -1,13 +1,26 @@
 """
 Keypad 門禁 + DHT11 Web Server
-
 平台: ESP32 系列 MicroPython
 
-流程層:
-  1) 啟動後背景連 WiFi，連上後啟動 HTTP server
-  2) 瀏覽器可先開首頁，但溫濕度預設為 LOCKED
-  3) Keypad 輸入 4321 再按 *（或 #）解鎖
-  4) 解鎖後 /temperature、/humidity 才回傳真實值
+=== 執行前確認 ===
+  WiFi:    SSID / PASSWORD（第 44–45 行）
+  密碼:    PASSCODE = "4321"（第 40 行）
+  跑法:    make run
+
+=== 接線 ===
+  DHT11: VCC→3.3V, DATA→D4, GND→GND
+  鍵盤:  R1-R4→D5,D13,D14,D15；C1-C4→D18,D19,D21,D23
+
+=== 操作 ===
+  1) 終端機看到 "Server running at http://x.x.x.x" → 瀏覽器開那個網址
+  2) Keypad 輸入 4321 再按 * 或 # 解鎖
+  3) 解鎖後網頁才顯示溫濕度；按 D 清除輸入
+
+=== 硬體清單 ===
+  ESP32 x1、4x4 矩陣鍵盤 x1、DHT11 模組(3腳) x1、WiFi x1、杜邦線若干
+
+  實機驗證通過：ESP32-D0WD-V3 rev3.1（NodeMCU-32S 30-pin）· MicroPython v1.28.0
+  KEYMAP 已由 keypad_scan.py 實測校正（實際掃描結果與鍵盤絲印方向相反）
 """
 
 import dht
@@ -30,17 +43,17 @@ PASSCODE = "4321"
 DHT11_SDA_PIN = 4
 
 # WiFi（真機測試請填入你的基地台帳密）
-SSID = "YOUR_WIFI_SSID"
-PASSWORD = "YOUR_WIFI_PASSWORD"
+SSID = "YourSSID"
+PASSWORD = "YourPASSWORD"
 
 # Keypad 接線（保持你目前可用版本）
-ROW_PINS = (13, 14, 15, 16)
-COL_PINS = (17, 18, 19, 23)
+ROW_PINS = (5, 13, 14, 15)
+COL_PINS = (18, 19, 21, 23)
 KEYMAP = [
-    ["1", "2", "3", "A"],
-    ["4", "5", "6", "B"],
-    ["7", "8", "9", "C"],
-    ["*", "0", "#", "D"],
+    ["D", "C", "B", "A"],
+    ["#", "9", "6", "3"],
+    ["0", "8", "5", "2"],
+    ["*", "7", "4", "1"],
 ]
 
 # 硬體初始化
@@ -71,21 +84,29 @@ HTML = """\
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ESP32 Locker DHT11</title>
+  <title>ESP32 Locker</title>
   <style>
-    html { font-family: Arial; text-align: center; }
-    h2 { font-size: 2rem; margin-bottom: 0.6rem; }
-    p { font-size: 1.2rem; margin: 0.4rem 0; }
-    .v { font-weight: bold; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .card { background: #fff; border-radius: 16px; padding: 2rem 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,.1); text-align: center; width: 320px; }
+    h2 { font-size: 1.4rem; color: #333; margin-bottom: 1.5rem; }
+    .status { font-size: 1.1rem; font-weight: bold; padding: .5rem 1.2rem; border-radius: 20px; display: inline-block; margin-bottom: 1.2rem; }
+    .LOCKED   { background: #fee2e2; color: #dc2626; }
+    .UNLOCKED { background: #dcfce7; color: #16a34a; }
+    .row { display: flex; justify-content: space-between; margin: .6rem 0; font-size: 1rem; color: #555; }
+    .val { font-weight: bold; color: #222; }
+    .hint { margin-top: 1.4rem; font-size: .8rem; color: #aaa; }
   </style>
 </head>
 <body>
-  <h2>ESP32 Locker + DHT11</h2>
-  <p>Locker: <span id="locker" class="v">__LOCKER_STATE__</span></p>
-  <p>Last PIN: <span id="pin_result" class="v">__PIN_RESULT__</span></p>
-  <p>Temperature: <span id="temperature" class="v">--</span> &deg;C</p>
-  <p>Humidity: <span id="humidity" class="v">--</span> %</p>
-  <p>PIN: 4321 + *（或 #）解鎖；D 清除</p>
+  <div class="card">
+    <h2>ESP32 Locker + DHT11</h2>
+    <div id="locker" class="status __LOCKER_STATE__">__LOCKER_STATE__</div>
+    <div class="row"><span>Last PIN</span><span id="pin_result" class="val">__PIN_RESULT__</span></div>
+    <div class="row"><span>Temperature</span><span class="val"><span id="temperature">--</span> &deg;C</span></div>
+    <div class="row"><span>Humidity</span><span class="val"><span id="humidity">--</span> %</span></div>
+    <div class="hint">PIN: 4321 + * 解鎖 &nbsp;|&nbsp; D 清除</div>
+  </div>
   <script>
     function update(id, url) {
       var x = new XMLHttpRequest();
@@ -97,12 +118,18 @@ HTML = """\
       x.open("GET", url, true);
       x.send();
     }
+    function updateLocker() {
+      var el = document.getElementById("locker");
+      var s = el.textContent.trim();
+      el.className = "status " + s;
+    }
     function poll() {
       update("temperature", "/temperature");
       update("humidity", "/humidity");
     }
     poll();
     setInterval(poll, 10000);
+    setInterval(function(){location.reload()}, 5000);
   </script>
 </body>
 </html>
@@ -215,6 +242,8 @@ def init_wifi():
     """流程層: 初始化 WiFi 並發出第一次連線請求。"""
     global wlan, last_wifi_retry_ms
     wlan = network.WLAN(network.STA_IF)
+    wlan.active(False)
+    time.sleep_ms(100)
     wlan.active(True)
     wlan.connect(SSID, PASSWORD)
     last_wifi_retry_ms = time.ticks_ms()
