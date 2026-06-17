@@ -20,18 +20,20 @@ ESP32（30/38-pin）· GPIO · ADC · PWM · I2C · SPI · UART · WiFi · BLE
 
 ## How to Run
 1. 燒錄 MicroPython firmware 至 ESP32（[micropython.org](https://micropython.org/download/ESP32_GENERIC/)）；初次或清空重燒：`make erase && make flash`
-2. 在根目錄 `Makefile` 設定 `TARGET`（預設 `keypad_dht11`）與 `PORT`（預設 `/dev/cu.usbserial-0001`）
-3. `make run` — 直接將腳本推送到板子並執行，無需上傳檔案
+2. 在根目錄 `Makefile`：`TARGET` 預設自動抓最近修改的 `.py`；`PORT` 自動掃描 `/dev/cu.usbserial-*`，通常不需手動設定
+3. `make run` — 直接將腳本推送到板子並執行（不寫 flash），支援互動式指令輸入
 4. 依範例頂部註解修改 PIN 腳與 WiFi 帳密後再執行
 
 ## Validation Status
 **`advanced/keypad_dht11.py` 已在 ESP32-D0WD-V3 rev3.1 實機驗證通過**（4x4 Keypad + DHT11 + WiFi Web Server，PIN 解鎖、溫濕度顯示均正常）。
 
+**`advanced/motor_console.py` 已實機驗證通過**（Relay + SG90 + LED + 28BYJ-48 步進馬達，序列指令互動控制均正常）。
+
 其餘範例為課程學習整理，邏輯與結構已核對，未全數在實機上驗證；使用前請依實際板子與 MicroPython 版本測試調整。
 
-| 接線實照 | 網頁截圖 |
-|----------|----------|
-| ![接線](docs/keypad_dht11_wiring.jpg) | ![網頁](docs/keypad_dht11_unlocked.png) |
+| keypad_dht11 接線實照 | keypad_dht11 網頁截圖 | motor_console 接線實照 |
+|----------------------|----------------------|----------------------|
+| ![接線](docs/keypad_dht11_wiring.jpg) | ![網頁](docs/keypad_dht11_unlocked.png) | ![接線](docs/motor_console_wiring.jpeg) |
 
 ---
 
@@ -120,6 +122,7 @@ ESP32（30/38-pin）· GPIO · ADC · PWM · I2C · SPI · UART · WiFi · BLE
 |------|------|------|
 | `keypad_dht11.py` | Keypad 門禁 + DHT11 Web Server，PIN 解鎖後網頁才顯示溫濕度 ✅ 實機驗證 | ⭐⭐⭐ |
 | `keypad_scan.py` | 4x4 Keypad 診斷工具：印出實際 row/col 索引，用於校正 KEYMAP 接線方向 | ⭐ |
+| `motor_console.py` | 序列指令控制台：Relay + SG90 + LED + 28BYJ-48 步進馬達，互動式輸入 ✅ 實機驗證 | ⭐⭐⭐ |
 
 ### 依賴庫 (`lib/`)
 
