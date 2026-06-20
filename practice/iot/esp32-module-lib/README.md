@@ -3,7 +3,7 @@
 ESP32 MicroPython 模組範例庫。
 
 ## What I Built
-45 種 ESP32 MicroPython 模組範例，依功能分 8 類（核心技術 / 感測器 / 輸出控制 / 人機介面 / 無線通訊 / 即時時鐘 / 整合範例 / 驅動庫），每個範例含難度分級。職訓課程期間整理，作為 ESP32 周邊控制的完整參考。
+37 種 ESP32 MicroPython 模組範例，依功能分 7 類（感測器 / 輸出控制 / 人機介面 / 無線通訊 / 即時時鐘 / 整合範例 / 驅動庫），每個範例含難度分級。職訓課程期間整理，作為 ESP32 周邊控制的完整參考。原核心技術 6 模組（GPIO / ADC / PWM / 硬體中斷 / 深度睡眠 + 看門狗 / 雙核心）已整合進 `advanced/night_light.py`。
 
 ## Skills Demonstrated
 - GPIO / ADC / PWM / 硬體中斷 / 深度睡眠 + 看門狗 / 雙核心
@@ -16,7 +16,7 @@ ESP32 MicroPython 模組範例庫。
 ESP32（30/38-pin）· GPIO · ADC · PWM · I2C · SPI · UART · WiFi · BLE
 > 各款板子腳位差異請查板廠官方 pinout（本庫不附第三方接線圖）。
 
-**實測板**：ESP32-D0WD-V3 rev3.1（NodeMCU-32S 30-pin）· 240MHz · MicroPython v1.28.0
+**實測板**：ESP32-D0WD-V3 rev3.1（NodeMCU-32S 30-pin）· 240MHz · MicroPython v1.19.1
 
 ## How to Run
 1. 燒錄 MicroPython firmware 至 ESP32（[micropython.org](https://micropython.org/download/ESP32_GENERIC/)）；初次或清空重燒：`make erase && make flash`
@@ -29,26 +29,19 @@ ESP32（30/38-pin）· GPIO · ADC · PWM · I2C · SPI · UART · WiFi · BLE
 
 **`advanced/motor_console.py` 已實機驗證通過**（Relay + SG90 + LED + 28BYJ-48 步進馬達，序列指令互動控制均正常）。
 
+**`advanced/night_light.py` 已實機驗證通過**（六份 core-skills 全整合：光敏判天黑 + PIR 偵測 + 可調電阻調亮度 + 跑馬燈啟動動畫 + 按鈕切模式 + JSON/NVS 存設定 + 雙核心 + WDT + deep sleep/PIR 喚醒）。
+
 其餘範例為課程學習整理，邏輯與結構已核對，未全數在實機上驗證；使用前請依實際板子與 MicroPython 版本測試調整。
 
-| keypad_dht11 接線實照 | keypad_dht11 網頁截圖 | motor_console 接線實照 |
-|----------------------|----------------------|----------------------|
-| ![接線](docs/keypad_dht11_wiring.jpg) | ![網頁](docs/keypad_dht11_unlocked.png) | ![接線](docs/motor_console_wiring.jpeg) |
+| keypad_dht11 接線實照 | keypad_dht11 網頁截圖 | motor_console 接線實照 | night_light 接線實照 |
+|----------------------|----------------------|----------------------|----------------------|
+| ![接線](docs/keypad_dht11_wiring.jpg) | ![網頁](docs/keypad_dht11_unlocked.png) | ![接線](docs/motor_console_wiring.jpeg) | ![接線](docs/night_light_wiring.jpeg) |
 
 ---
 
 ## 模組總覽
 
-### 核心技術 (`core-skills/`)
-
-| 檔案 | 功能 | 難度 |
-|------|------|------|
-| `basics.py` | GPIO 基礎、LED、按鈕 | ⭐ |
-| `adc.py` | ADC 類比輸入讀取 | ⭐ |
-| `flash_storage.py` | Flash 掉電儲存設定值 | ⭐ |
-| `interrupt.py` | GPIO 硬體中斷 | ⭐⭐ |
-| `sleep_wdt.py` | 深度睡眠 + 看門狗計時器 | ⭐⭐ |
-| `dual_core.py` | 雙核心分工（Core0 / Core1） | ⭐⭐⭐ |
+> **核心技術**（GPIO / ADC / PWM / 硬體中斷 / 深度睡眠 + 看門狗 / 雙核心）原為 `core-skills/` 六支獨立範例，現已全數整合進 `advanced/night_light.py`，原檔移除。
 
 ### 感測器 (`sensors/`)
 
@@ -67,12 +60,11 @@ ESP32（30/38-pin）· GPIO · ADC · PWM · I2C · SPI · UART · WiFi · BLE
 | 檔案 | 功能 | 難度 |
 |------|------|------|
 | `pwm.py` | PWM 輸出（亮度 / 蜂鳴器） | ⭐ |
-| `relay.py` | 繼電器控制（序列埠指令） | ⭐ |
-| `servo.py` | 伺服馬達 0~180° | ⭐ |
 | `dc_motor.py` | 直流馬達正反轉（L298N） | ⭐⭐ |
-| `stepper.py` | 步進馬達精確控制 | ⭐⭐ |
 | `ws2812b.py` | WS2812B 全彩 RGB 燈帶 | ⭐⭐ |
 | `matrix_led_max7219.py` | 8x8 矩陣 LED（MAX7219） | ⭐⭐ |
+
+> `relay` / `servo`（SG90）/ `stepper`（28BYJ-48）原為獨立範例，現已整合進 `advanced/motor_console.py`，原檔移除。
 
 ### 人機介面 (`interface/`)
 
@@ -123,6 +115,8 @@ ESP32（30/38-pin）· GPIO · ADC · PWM · I2C · SPI · UART · WiFi · BLE
 | `keypad_dht11.py` | Keypad 門禁 + DHT11 Web Server，PIN 解鎖後網頁才顯示溫濕度 ✅ 實機驗證 | ⭐⭐⭐ |
 | `keypad_scan.py` | 4x4 Keypad 診斷工具：印出實際 row/col 索引，用於校正 KEYMAP 接線方向 | ⭐ |
 | `motor_console.py` | 序列指令控制台：Relay + SG90 + LED + 28BYJ-48 步進馬達，互動式輸入 ✅ 實機驗證 | ⭐⭐⭐ |
+| `night_light.py` | 智慧夜燈：六份 core-skills 全整合（光敏 + PIR + 可調電阻 + 跑馬燈 + 按鈕切模式 + JSON/NVS + 雙核心 + WDT + deep sleep）✅ 實機驗證 | ⭐⭐⭐ |
+| `ldr_test.py` | 光敏電阻診斷工具：持續印 ADC 讀值，用於校正天黑門檻 | ⭐ |
 
 ### 依賴庫 (`lib/`)
 

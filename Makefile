@@ -1,5 +1,6 @@
 PORT     := $(shell ls /dev/cu.usbserial-* /dev/cu.wchusbserial* /dev/cu.SLAB_USBtoUART* 2>/dev/null | head -1)
 MPREMOTE := $(HOME)/.venvs/mpremote/bin/mpremote
+PYSERIAL := $(HOME)/.venvs/mpremote/bin/python3
 ESPTOOL  := esptool
 FIRMWARE := /tmp/micropython_esp32.bin
 FW_ROOT  := practice/iot/esp32-module-lib/firmware
@@ -7,7 +8,10 @@ TARGET   := $(notdir $(basename $(shell find $(FW_ROOT) -name "*.py" | xargs ls 
 
 .PHONY: run repl erase flash help
 
+## 跑腳本（預設跑最近存檔的 .py；要換檔就先 Cmd+S 那支再 make run）
 run:
+	$(PYSERIAL) -c "import serial,time; s=serial.Serial('$(PORT)'); s.dtr=False; time.sleep(0.1); s.dtr=True; s.close()"
+	sleep 1
 	$(MPREMOTE) connect $(PORT) run --no-follow $(shell find $(FW_ROOT) -name "$(TARGET).py" | head -1) + repl
 
 ## 開啟互動式 REPL（不跑腳本）
@@ -26,7 +30,7 @@ help:
 	@echo ""
 	@echo "ESP32 MicroPython 控制指令"
 	@echo "---------------------------"
-	@echo "  make run                   執行 TARGET 設定的腳本（預設：最近修改的 .py）"
+	@echo "  make run                   跑最近存檔的 .py（要換檔先 Cmd+S 該檔）"
 	@echo "  make repl                  開啟互動式 REPL"
 	@echo "  make erase                 清空 Flash"
 	@echo "  make flash                 重刷 MicroPython 韌體"
