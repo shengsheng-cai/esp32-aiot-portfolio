@@ -28,11 +28,11 @@ Interface - tft_st7735
   - initr() 適用黑色邊框版本（INITR_BLACKTAB）
 
 硬體接線:
-  SCL(SCLK) → GPIO 18
-  SDA(MOSI) → GPIO 23
-  RES(RST)  → GPIO 5
-  DC        → GPIO 17
-  CS        → GPIO 16
+  SCL(SCLK) → D18
+  SDA(MOSI) → D23
+  RES(RST)  → D5
+  DC        → D17
+  CS        → D16
   BL(背光)   → 3.3V（或 GPIO 控制）
   VCC       → 3.3V
   GND       → GND

@@ -30,8 +30,8 @@ ESP-01 常用 AT 指令:
     本模組主要供 Arduino UNO 搭配 ESP-01 使用的課程參考
 
 硬體接線（ESP32 ↔ ESP-01）:
-  ESP-01 TX  → GPIO 16（ESP32 UART2 RX）
-  ESP-01 RX  → GPIO 17（ESP32 UART2 TX）
+  ESP-01 TX  → D16（ESP32 UART2 RX）
+  ESP-01 RX  → D17（ESP32 UART2 TX）
   ESP-01 VCC → 3.3V（需能供應至少 200mA）
   ESP-01 CH_PD(EN) → 3.3V
   ESP-01 GND → GND

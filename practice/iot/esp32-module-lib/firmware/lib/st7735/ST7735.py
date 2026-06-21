@@ -1,6 +1,8 @@
+# Source: https://github.com/boochow/MicroPython-ST7735
+# Copyright (c) boochow — MIT License
 #driver for Sainsmart 1.8" TFT display ST7735
 #Translated by Guy Carver from the ST7735 sample code.
-#Modirfied for micropython-esp32 by boochow 
+#Modirfied for micropython-esp32 by boochow
 
 import machine
 import time

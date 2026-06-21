@@ -24,9 +24,9 @@ ADXL335 規格:
 硬體接線:
   ADXL335 VCC  → 3.3V
   ADXL335 GND  → GND
-  ADXL335 X    → GPIO 36
-  ADXL335 Y    → GPIO 39
-  ADXL335 Z    → GPIO 34
+  ADXL335 X    → D36
+  ADXL335 Y    → D39
+  ADXL335 Z    → D34
 """
 
 import math

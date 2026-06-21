@@ -21,10 +21,10 @@ MQ-2 說明:
   VR 可調 DO 的觸發靈敏度，不影響 AO 輸出值
 
 硬體接線:
-  MQ-2 Aout → GPIO 34（ADC1，input-only）
-  MQ-2 Dout → GPIO 13
+  MQ-2 Aout → D34（ADC1，input-only）
+  MQ-2 Dout → D13
   MQ-2 VCC  → 5V（建議），GND → GND
-  LED       → GPIO 2（內建）
+  LED       → D2（內建）
 """
 
 from machine import Pin, ADC

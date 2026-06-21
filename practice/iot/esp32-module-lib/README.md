@@ -3,7 +3,7 @@
 ESP32 MicroPython 模組範例庫。
 
 ## What I Built
-37 種 ESP32 MicroPython 模組範例，依功能分 7 類（感測器 / 輸出控制 / 人機介面 / 無線通訊 / 即時時鐘 / 整合範例 / 驅動庫），每個範例含難度分級。職訓課程期間整理，作為 ESP32 周邊控制的完整參考。原核心技術 6 模組（GPIO / ADC / PWM / 硬體中斷 / 深度睡眠 + 看門狗 / 雙核心）已整合進 `advanced/night_light.py`。
+39 種 ESP32 MicroPython 模組範例，依功能分 7 類（感測器 / 輸出控制 / 人機介面 / 無線通訊 / 即時時鐘 / 整合範例 / 驅動庫），每個範例含難度分級。職訓課程期間整理，作為 ESP32 周邊控制的完整參考。原核心技術 6 模組（GPIO / ADC / PWM / 硬體中斷 / 深度睡眠 + 看門狗 / 雙核心）已整合進 `advanced/night_light.py`。
 
 ## Skills Demonstrated
 - GPIO / ADC / PWM / 硬體中斷 / 深度睡眠 + 看門狗 / 雙核心

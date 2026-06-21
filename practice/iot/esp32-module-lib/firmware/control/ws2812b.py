@@ -12,7 +12,7 @@ Control - ws2812b
   - 少量 LED（8 顆以內）可由 USB 供電
 
 硬體接線:
-  燈帶 DIN → GPIO 2
+  燈帶 DIN → D2
   燈帶 VCC → 5V
   燈帶 GND → GND
 """

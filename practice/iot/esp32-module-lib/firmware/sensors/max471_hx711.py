@@ -23,17 +23,17 @@ Arduino HX711 library → MicroPython hx711 驅動
   或手動下載 https://github.com/robert-hh/hx711
 
 硬體接線（MAX471）:
-  MAX471 VT  → GPIO 32（ADC1_CH4）
-  MAX471 AT  → GPIO 33（ADC1_CH5）
+  MAX471 VT  → D32（ADC1_CH4）
+  MAX471 AT  → D33（ADC1_CH5）
   MAX471 GND → ESP32 GND
   MAX471 VIN/VOUT 串入被測電路（VOUT 接負載，VIN 接電源正）
 
 硬體接線（HX711）:
-  HX711 DOUT → GPIO 16
-  HX711 SCK  → GPIO 4
+  HX711 DOUT → D16
+  HX711 SCK  → D4
   HX711 VCC  → 3.3V（或 5V）
   HX711 GND  → GND
-  校正按鈕   → GPIO 23（PULL_UP）
+  校正按鈕   → D23（PULL_UP）
 """
 
 import time

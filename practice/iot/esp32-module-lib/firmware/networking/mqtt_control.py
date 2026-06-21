@@ -29,10 +29,10 @@ Servo PWM 計算:
   duty_u16 範圍: 1638（0°）〜 7864（180°）
 
 硬體接線:
-  Servo 訊號線  → GPIO 4
-  繼電器 IN     → GPIO 12
-  I2C LCD SDA   → GPIO 21（選配）
-  I2C LCD SCL   → GPIO 22（選配）
+  Servo 訊號線  → D4
+  繼電器 IN     → D12
+  I2C LCD SDA   → D21（選配）
+  I2C LCD SCL   → D22（選配）
 """
 
 import time

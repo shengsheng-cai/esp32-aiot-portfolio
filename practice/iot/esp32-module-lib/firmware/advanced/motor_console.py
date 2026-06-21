@@ -45,7 +45,7 @@ Motor Console v0.5 — Relay + Servo + LED + Stepper
   - 建議繼電器電源與 ESP32 電源完全隔離，避免 EMI 造成 MCU 重啟
   - 步進馬達使用完畢應將所有線圈設 LOW，持續通電會過熱
   - L298N ENA/ENB 洞接 5V 讓兩通道常開，不需 PWM 控速
-  - GPIO 34、35、36、39 為輸入專用，無法輸出 PWM
+  - D34、D35、D36、D39 為輸入專用，無法輸出 PWM
 """
 
 import sys

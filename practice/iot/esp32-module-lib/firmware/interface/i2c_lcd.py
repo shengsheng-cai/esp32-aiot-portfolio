@@ -26,8 +26,8 @@ LCD 規格:
   或讓 ESP32 連 WiFi 後自動同步
 
 硬體接線:
-  LCD 模組 SDA → GPIO 21
-  LCD 模組 SCL → GPIO 22
+  LCD 模組 SDA → D21
+  LCD 模組 SCL → D22
   LCD 模組 VCC → 5V（部分模組支援 3.3V，視模組設計）
   LCD 模組 GND → GND
 """

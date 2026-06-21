@@ -26,8 +26,8 @@ SSD1306 規格:
   - 三角形需用三條線組合
 
 硬體接線:
-  SSD1306 SCL → GPIO 22
-  SSD1306 SDA → GPIO 21
+  SSD1306 SCL → D22
+  SSD1306 SDA → D21
   SSD1306 VCC → 3.3V
   SSD1306 GND → GND
 """

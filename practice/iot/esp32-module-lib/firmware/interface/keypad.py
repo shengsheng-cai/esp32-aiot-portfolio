@@ -15,8 +15,8 @@ Interface - keypad
   - 某 COL 拉 LOW 時，若某 ROW 讀到 LOW，即對應按鍵被按下
 
 硬體接線:
-  ROW 1~4 → GPIO 32, 33, 25, 26（PULL_UP 輸入）
-  COL 1~4 → GPIO 27, 14, 12, 13（輸出）
+  ROW 1~4 → D32, D33, D25, D26（PULL_UP 輸入）
+  COL 1~4 → D27, D14, D12, D13（輸出）
 """
 
 import time

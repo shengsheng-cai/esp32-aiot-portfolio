@@ -18,9 +18,9 @@ ESP32 · DHT11 · I2C LCD（PCF8574 0x27）· SG90 舵機 · 被動蜂鳴器 · 
 介面：GPIO · PWM · I2C · WiFi · MQTT
 
 ```
-GPIO 21/22 → I2C SDA/SCL（LCD）
-GPIO 15 → DHT11    GPIO 13 → SG90
-GPIO 12 → 蜂鳴器   GPIO 2 → LED
+D21/D22 → I2C SDA/SCL（LCD）
+D15 → DHT11    D13 → SG90
+D12 → 蜂鳴器   D2 → LED
 ```
 
 ## How to Run
@@ -30,7 +30,7 @@ GPIO 12 → 蜂鳴器   GPIO 2 → LED
 4. PC 端：`python host/mqtt_sub.py` 看 MQTT 資料，或啟動 `host/iot_dashboard/` 儀表板
 
 ## Validation Status
-**程式層級練習** — ESP32 端 + MQTT 資料流為核心，尚未實機接線驗證。
+**程式層級練習，邏輯與結構已核對** — ESP32 端 + MQTT 資料流為核心，待實機接線驗證。
 > ⚠️ `host/iot_dashboard/` 缺 `templates/index.html` 與 `templates/jquery.canvasjs.min.js`（原始碼未含），儀表板目前無法直接跑起來，需自行補齊。
 
 ## Next Step
@@ -43,11 +43,11 @@ GPIO 12 → 蜂鳴器   GPIO 2 → LED
 | 模組 | 檔案 | 硬體 | 功能 |
 |------|------|------|------|
 | I2C LCD | `i2c_lcd.py` | LCD 1602 + PCF8574（0x27） | 字元顯示 |
-| PWM 舵機 | `servo.py` | SG90（GPIO 13） | 0~180° 控制、掃描 |
-| LED 呼吸燈 | `led_breath.py` | LED（GPIO 2） | PWM 漸亮漸暗 |
-| 蜂鳴器 | `buzzer.py` | 被動蜂鳴器（GPIO 12） | Do Re Mi 音階 |
+| PWM 舵機 | `servo.py` | SG90（D13） | 0~180° 控制、掃描 |
+| LED 呼吸燈 | `led_breath.py` | LED（D2） | PWM 漸亮漸暗 |
+| 蜂鳴器 | `buzzer.py` | 被動蜂鳴器（D12） | Do Re Mi 音階 |
 | NTP 時鐘 | `ntp_clock.py` | — | WiFi 對時，取代外接 RTC |
-| 主程式 | `main.py` | DHT11（GPIO 15） | DHT 讀取 → LCD → MQTT pub |
+| 主程式 | `main.py` | DHT11（D15） | DHT 讀取 → LCD → MQTT pub |
 
 ## 技術棧
 - 硬體：ESP32（38-pin 或相容板）

@@ -33,8 +33,8 @@ HC-05 AT 常用指令（進入 AT 模式：長按 KEY 按鈕後通電）:
 HC-05 AT 模式固定鮑率 38400，透通模式鮑率依設定（預設 V2=38400、V3=9600）
 
 硬體接線（範例 2 - HC-05）:
-  HC-05 TXD → GPIO 16（ESP32 UART2 RX）
-  HC-05 RXD → GPIO 17（ESP32 UART2 TX）
+  HC-05 TXD → D16（ESP32 UART2 RX）
+  HC-05 RXD → D17（ESP32 UART2 TX）
   HC-05 VCC → 5V（或 3.3V，視模組版本）
   HC-05 GND → GND
 """

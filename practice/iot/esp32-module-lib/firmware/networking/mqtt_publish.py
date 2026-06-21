@@ -22,10 +22,10 @@ MQTT topic 設計:
   WiFi 斷線 → 自動重連
   DHT 讀取失敗 → 跳過本次，繼續下一輪
   MQTT publish 失敗 → 印 log，不中斷主迴圈
-  LED 閃爍指示運行狀態（GPIO 2，內建 LED）
+  LED 閃爍指示運行狀態（D2，內建 LED）
 
 硬體接線:
-  DHT11 DATA → GPIO 15（可換 DHT22，改 dht.DHT22）
+  DHT11 DATA → D15（可換 DHT22，改 dht.DHT22）
 """
 
 import dht

@@ -17,9 +17,9 @@ ESP32 · SG90 舵機 · HW-482 繼電器 · LCD 1602
 介面：UART · I2C · MQTT / Serial
 
 ```
-GPIO 9 → SG90 Signal     GPIO 17 → HW-482 Relay
-GPIO 1/3 → UART TX/RX（接 PC USB-Serial）
-GPIO 21/22 → LCD SDA/SCL
+D9 → SG90 Signal     D17 → HW-482 Relay
+TX0/RX0 → UART TX/RX（接 PC USB-Serial）
+D21/D22 → LCD SDA/SCL
 ```
 
 ## How to Run
@@ -30,7 +30,7 @@ GPIO 21/22 → LCD SDA/SCL
 5. 瀏覽器開 `http://localhost:9090/a.mjpg` 看即時串流
 
 ## Validation Status
-**程式層級練習** — PC 端 OpenCV 偵測邏輯為核心；ESP32 端硬體控制尚未實機驗證。caffemodel 需另行下載。
+**程式層級練習，邏輯與結構已核對** — PC 端 OpenCV 偵測邏輯為核心；ESP32 端硬體控制待實機驗證。caffemodel 需另行下載。
 
 ## Next Step
 接 ESP32 + SG90 做實機驗證，錄一段「影像辨識 → 馬達追蹤」的 demo 影片或 GIF。

@@ -12,9 +12,9 @@ Control - matrix_led_max7219
   - SPI 通訊，MISO 不使用
 
 硬體接線:
-  DIN  → GPIO 23 (MOSI)
-  CLK  → GPIO 18 (SCK)
-  CS   → GPIO 21 (SS)
+  DIN  → D23 (MOSI)
+  CLK  → D18 (SCK)
+  CS   → D21 (SS)
   VCC  → 5V
   GND  → GND
 

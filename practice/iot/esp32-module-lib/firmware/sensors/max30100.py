@@ -26,8 +26,8 @@ Arduino MAX30100lib → MicroPython max30100 驅動
 補充：MAX30102（更新版本）相容性更好，可考慮替換
 
 硬體接線:
-  MAX30100 SCL → GPIO 22
-  MAX30100 SDA → GPIO 21
+  MAX30100 SCL → D22
+  MAX30100 SDA → D21
   MAX30100 VCC → 3.3V（或 5V，視模組穩壓設計）
   MAX30100 GND → GND
 """

@@ -25,7 +25,7 @@ SPIFFS → 文件系統對比:
   MicroPython: 用 mpremote cp html/index.html :/www/index.html 上傳
 
 硬體接線:
-  LED → GPIO 2（內建 LED）
+  LED → D2（內建 LED）
 """
 
 import asyncio

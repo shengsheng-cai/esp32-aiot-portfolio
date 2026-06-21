@@ -1,3 +1,5 @@
+# Source: https://github.com/dhylands/python_lcd
+# Copyright (c) Dave Hylands — MIT License
 """Provides an API for talking to HD44780 compatible character LCDs."""
 
 import time

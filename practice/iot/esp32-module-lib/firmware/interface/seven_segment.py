@@ -15,19 +15,19 @@ Interface - seven_segment
   STCP LOW → 送 8 bit 資料（SH_CP 時脈）→ STCP HIGH（鎖存輸出）
 
 硬體接線（範例 1 - 直接 GPIO，共陽）:
-  a,b,c,d,e,f,g → GPIO 2, 4, 5, 12, 13, 14, 15
-  COM D1~D4 → GPIO 16, 17, 18, 19（HIGH = 選中）
+  a,b,c,d,e,f,g → D2, D4, D5, D12, D13, D14, D15
+  COM D1~D4 → D16, D17, D18, D19（HIGH = 選中）
 
 硬體接線（範例 2 - 74HC595，共陰）:
-  SH_CP(CLK)  → GPIO 18
-  ST_CP(LATCH)→ GPIO 19
-  DS(DATA)    → GPIO 23
-  COM D1~D4   → GPIO 16, 17, 21, 22（LOW = 選中）
+  SH_CP(CLK)  → D18
+  ST_CP(LATCH)→ D19
+  DS(DATA)    → D23
+  COM D1~D4   → D16, D17, D21, D22（LOW = 選中）
   74HC595 MR  → 3.3V（不重置），OE → GND（輸出致能）
 
 硬體接線（範例 3 - TM1637）:
-  CLK → GPIO 22
-  DIO → GPIO 23
+  CLK → D22
+  DIO → D23
 """
 
 import time

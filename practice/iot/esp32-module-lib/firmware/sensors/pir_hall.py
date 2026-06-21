@@ -27,9 +27,9 @@ ESP32 內建霍爾感應器說明:
   若需要霍爾感應，請改用外接 Hall sensor 模組
 
 硬體接線:
-  HC-SR501  OUT → GPIO 14  VCC → 5V  GND → GND
-  霍爾模組  AO  → GPIO 34  DO  → GPIO 33  VCC → 3.3V  GND → GND
-  LED           → GPIO 2（內建）
+  HC-SR501  OUT → D14  VCC → 5V  GND → GND
+  霍爾模組  AO  → D34  DO  → D33  VCC → 3.3V  GND → GND
+  LED           → D2（內建）
 """
 
 from machine import Pin, ADC

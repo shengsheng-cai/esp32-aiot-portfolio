@@ -20,9 +20,9 @@ Interface - rotary_encoder
   - MicroPython 的 volatile 等效：ISR 修改全域變數，Python GIL 保護基本資料型態
 
 硬體接線:
-  CLK → GPIO 22
-  DT  → GPIO 23
-  SW  → GPIO 21（PULL_UP）
+  CLK → D22
+  DT  → D23
+  SW  → D21（PULL_UP）
   +   → 3.3V
   GND → GND
 """

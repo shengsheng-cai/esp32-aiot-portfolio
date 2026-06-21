@@ -1,3 +1,5 @@
+# Source: https://github.com/boochow/MicroPython-ST7735
+# Copyright (c) boochow — MIT License
 
 seriffont = {"Width": 6, "Height": 8, "Start": 32, "End": 127, "Data": bytearray([
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, #0x00,

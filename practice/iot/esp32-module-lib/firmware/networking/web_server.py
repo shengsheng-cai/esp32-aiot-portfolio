@@ -20,7 +20,7 @@ WiFi 模式選擇:
   AP 模式  — ESP32 自建 WiFi，手機/電腦直連（無需路由器）
 
 硬體接線:
-  LED → GPIO 2（內建 LED）
+  LED → D2（內建 LED）
 """
 
 import socket

@@ -20,11 +20,11 @@ ESP32 ADC 注意:
   ADC2 在 WiFi 啟用時無法使用；優先選 ADC1（GPIO 32〜39）
 
 硬體接線（以下為 ESP32 腳位，可自行調整）:
-  聲音模組  AO → GPIO 34  DO → GPIO 35  VCC→3.3V  GND→GND
-  雨水模組  AO → GPIO 34  DO → GPIO 35  VCC→3.3V  GND→GND
-  水位模組  AO → GPIO 34               VCC→3.3V  GND→GND（感測探頭與供電分開）
-  火焰感測  AO → GPIO 34               VCC→3.3V  GND→GND
-  LED           → GPIO 2（內建）
+  聲音模組  AO → D34  DO → D35  VCC→3.3V  GND→GND
+  雨水模組  AO → D34  DO → D35  VCC→3.3V  GND→GND
+  水位模組  AO → D34           VCC→3.3V  GND→GND（感測探頭與供電分開）
+  火焰感測  AO → D34           VCC→3.3V  GND→GND
+  LED           → D2（內建）
 """
 
 from machine import Pin, ADC

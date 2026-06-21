@@ -25,8 +25,8 @@ Arduino RTClib → MicroPython machine.I2C 直接讀寫寄存器
   0x05 月  0x06 年  0x11 溫度 MSB  0x12 溫度 LSB（高 2bit）
 
 硬體接線:
-  DS3231 SCL → GPIO 22
-  DS3231 SDA → GPIO 21
+  DS3231 SCL → D22
+  DS3231 SDA → D21
   DS3231 VCC → 3.3V（或 5V）
   DS3231 GND → GND
 """

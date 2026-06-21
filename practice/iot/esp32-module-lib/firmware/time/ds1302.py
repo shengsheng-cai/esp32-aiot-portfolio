@@ -21,9 +21,9 @@ Arduino RtcDS1302 / DS1302 函式庫 → MicroPython bit-bang 自行實現協議
   月 0x04  週 0x05  年 0x06  寫保護 0x07
 
 硬體接線:
-  DS1302 CLK  → GPIO 5
-  DS1302 DAT  → GPIO 4
-  DS1302 RST  → GPIO 2
+  DS1302 CLK  → D5
+  DS1302 DAT  → D4
+  DS1302 RST  → D2
   DS1302 VCC  → 3.3V（或 5V）
   DS1302 GND  → GND
 """

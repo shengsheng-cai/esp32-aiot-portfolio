@@ -11,9 +11,9 @@ Control - dc_motor
   L9110: 2.5V~12V，800mA 持續，控制邏輯與馬達共用 VCC
 
 L298N 接線:
-  IN3 → GPIO 16
-  IN4 → GPIO 17
-  ENA → GPIO 4（PWM 速度控制）
+  IN3 → D16
+  IN4 → D17
+  ENA → D4（PWM 速度控制）
   VCC → 5V（馬達電源）
   GND → GND
 
@@ -21,13 +21,13 @@ L298N 接線:
         避免 PWM 控速失效問題
 
 L9110 接線:
-  A-IA → GPIO 16
-  A-IB → GPIO 17
+  A-IA → D16
+  A-IB → D17
   VCC  → 5V（控制邏輯與馬達共用，建議使用 5V 馬達）
   GND  → GND
 
 旋鈕接線:
-  VR 中間腳 → GPIO 36（注意使用 3.3V）
+  VR 中間腳 → D36（注意使用 3.3V）
   VR 兩端   → 3.3V / GND
 """
 

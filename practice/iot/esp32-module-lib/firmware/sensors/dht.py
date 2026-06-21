@@ -23,7 +23,7 @@ Arduino DHT library (Adafruit) → MicroPython 內建 dht 模組
   dht.DHT22(pin)  對應 DHT22 / AM2302
 
 硬體接線:
-  DHT11/22 DATA → GPIO 27
+  DHT11/22 DATA → D27
   DHT11/22 VCC  → 3.3V（含背板模組）或 3.3V〜5V（裸 IC 需加 10kΩ 上拉）
   DHT11/22 GND  → GND
 """

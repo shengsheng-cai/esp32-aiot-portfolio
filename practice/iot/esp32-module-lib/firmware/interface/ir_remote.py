@@ -22,12 +22,12 @@ NEC 協議格式:
 VS1838B 輸出為低電位有效（接收到信號時 OUT 拉 LOW）
 
 硬體接線:
-  VS1838B OUT → GPIO 23（PULL_UP 輸入）
+  VS1838B OUT → D23（PULL_UP 輸入）
   VS1838B VCC → 3.3V
-  IR LED 陽極 → GPIO 22（串接 100Ω）
+  IR LED 陽極 → D22（串接 100Ω）
   IR LED 陰極 → GND
-  按鈕（發射觸發）→ GPIO 13（PULL_UP）
-  LED → GPIO 2（內建）
+  按鈕（發射觸發）→ D13（PULL_UP）
+  LED → D2（內建）
 """
 
 import time

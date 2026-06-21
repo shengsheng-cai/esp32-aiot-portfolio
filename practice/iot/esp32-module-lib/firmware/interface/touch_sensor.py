@@ -21,13 +21,13 @@ TTP223 模組:
   輸出為數位信號，直接用 digitalRead 讀取
 
 硬體接線（範例 1 - 內建觸摸）:
-  T8 = GPIO 33（接觸摸片或直接用手指靠近）
+  T8 = D33（接觸摸片或直接用手指靠近）
 
 硬體接線（範例 2 - TTP223 模組）:
-  TTP223 OUT → GPIO 33
+  TTP223 OUT → D33
   TTP223 VCC → 3.3V
   TTP223 GND → GND
-  LED         → GPIO 17（串接 220Ω）
+  LED         → D17（串接 220Ω）
 """
 
 import time

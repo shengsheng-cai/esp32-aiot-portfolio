@@ -25,7 +25,7 @@ ESP32 WebSocket 說明:
     mpremote mip install github:miguelgrinberg/microdot/src/microdot_websocket.py
 
 硬體接線:
-  LED → GPIO 2（內建 LED）
+  LED → D2（內建 LED）
 """
 
 import asyncio

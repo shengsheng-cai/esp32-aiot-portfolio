@@ -1,3 +1,5 @@
+# Source: https://github.com/dhylands/python_lcd
+# Copyright (c) Dave Hylands — MIT License
 """Implements a HD44780 character LCD connected via PCF8574 on I2C.
    This was tested with: https://www.wemos.cc/product/d1-mini.html"""
 
